@@ -1,0 +1,301 @@
+\documentclass[11pt]{exam}
+\newcommand{\myname}{Xue Zhongkai} %Write your name in here
+\newcommand{\myUCO}{122090636} %write your UCO in here
+\newcommand{\myhwtype}{Problem Set}
+\newcommand{\myhwnum}{2} %Homework set number
+\newcommand{\myclass}{ECO3121}
+\newcommand{\mylecture}{}
+\newcommand{\mysection}{}
+
+% Prefix for numedquestion's
+\newcommand{\questiontype}{Question}
+
+% Use this if your "written" questions are all under one section
+% For example, if the homework handout has Section 5: Written Questions
+% and all questions are 5.1, 5.2, 5.3, etc. set this to 5
+% Use for 0 no prefix. Redefine as needed per-question.
+\newcommand{\writtensection}{0}
+\input{Statax.tex}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  % Some math symbols
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[all]{xy}
+\usepackage{wrapfig}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\usepackage{centernot}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{\vert}{\vert}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\pagestyle{empty}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
+    \addtocounter{questionCounter}{1}%
+    \setcounter{partCounter}{0}%
+    \vspace{.2in}%
+        \noindent{\bf #1}%
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{numedquestion}[0]{%
+	\stepcounter{questionCounter}%
+    \vspace{.2in}%
+        \ifx\writtensection\undefined
+        \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+        \else
+          \if\writtensection0
+          \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+          \else
+          \noindent{\bf \questiontype \; \writtensection.\arabic{questionCounter} }%
+        \fi
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{alphaparts}[0]{%
+  \begin{enumerate}[label=\textbf{(\alph*)}]
+}{\end{enumerate}}
+
+\newenvironment{arabicparts}[0]{%
+  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*})]
+}{\end{enumerate}}
+
+\newenvironment{questionpart}[0]{%
+  \item
+}{}
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\vspace{#1}
+\end{framed}}
+
+\pagestyle{head}
+
+\headrule
+\header{\textbf{\myclass\ \mylecture\mysection}}%
+{\textbf{\myname\ (\myUCO)}}%
+{\textbf{\myhwtype\ \myhwnum}}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+  {\Large \myclass{} \myhwtype{} \myhwnum} \\
+  \myname{} (\myUCO{}) \\
+  \today
+\end{center}
+
+
+%problem1
+\begin{numedquestion}
+    \begin{enumerate}
+        %1
+        \item Yes. There are many other factors influencing the agricultural productivity, which could be highly correlated with \textit{rental\_in\_share} and \textit{rental\_out\_share}, thus causing the omitted variable bias of $\hat{\beta_1}$ and $\hat{\beta_2}$.
+        %2
+        \item We have the bias to be $$\hat{\beta_1} - \beta_1 = \rho Xu \frac{\sigma_u}{\sigma_X}$$
+        where $\rho Xu$ indicates the correlation between the omitted variable and the variable $X$.
+
+        Take the example of "the education level of the farmer". If the farmer with more education has a higher chance of renting in the lands, and education has a positive effect on \textit{yield}, then we have $\rho Xu$ to be positive, hence we may under-estimate $\beta_1$, i.e. $\hat{\beta_1} < \beta_1.$
+        %3
+        \item By adding other significant variables could the omitted variable bias be solved. 
+        
+         According to the data description, \textit{f9}, \textit{f25}, \textit{f29} represent quantity of fertilizer, diesel and agrochemicals respectively, which are key factors of agriculture production. 
+        
+         Recall the definition of \textit{yield} as the dependent variable:
+        \begin{statax}
+    gen yield=d32/d31
+        \end{statax}
+        and we had dependent variables \textit{rental\_in\_share} and \textit{rental\_out\_share}:
+        \begin{statax}
+    gen rental_in_share = c10/d31*100
+    gen rental_out_share = c13/d31*100
+        \end{statax}      
+         There seems to be some missing value "." in the data for \textit{f9}, \textit{f25}, \textit{f29}, and we replace them with the mean value:
+        \begin{statax}
+    egen mean_f9 = mean(f9)
+    replace f9 = mean_f9 if f9 == .
+    drop mean_f9
+
+    egen mean_f25 = mean(f25)
+    replace f25 = mean_f25 if f25 == .
+    drop mean_f25
+
+    egen mean_f29 = mean(f29)
+    replace f29 = mean_f29 if f29 == .
+    drop mean_f29
+        \end{statax}
+        and we add them into the regression
+        \begin{statax}
+    reg yield rental_in_share rental_out_share f9 f25 f29
+        \end{statax}  
+        with the corresponding results:
+        
+        \includegraphics[width=0.8\textwidth]{2-1-3.png}
+        
+        %4
+        \item The unit for \textit{rental\_in\_share} is percentage points, and we find $\beta_1$ to be $-0.1891$. Hence, a 10-percentage-points increase of rent-in land will result in 1.891 decrease in yield.
+        
+        %5
+        \item Assume $H_0: \beta_3 = 0$ s.t. education has nothing to do with the yield.
+
+         As a two-sided test, first we perform a regression between the yield and \textit{huzhu}'s education:
+        \begin{statax}
+    reg yield huzhu_edu
+        \end{statax}
+        we have
+        
+        \includegraphics[width=0.8\textwidth]{2-1-4.png}
+        
+         From the diagram we know $$\text{p-Value = P(P>|t|)} = 0.517$$
+        which is much larger than the significance-level $$\text{p-Value} > \alpha = 0.05$$
+        thus we fail to reject $H_0$. 
+        
+         As a result, there is no significance evidence that a higher education level is associated with a higher agriculture productivity.
+
+        %6
+        \item Assume $H_0: \beta_1 = \beta_2$ s.t. the renting in and renting out have the same effects. This statement is equivalent to $H_0': \theta = \beta_1 - \beta_2 = 0$, thus we could re-write the model as
+        $$yield_i = \beta_0 + \theta \cdot rental\_in\_share_i + \beta_2(rental\_in\_share_i+rental\_out\_share_i)+u_i$$
+        
+         As a two-sided test, first we perform a regression between the yield and the difference:
+        \begin{statax}
+    gen rental_total = rental_in_share + rental_out_share
+    reg yield rental_in_share rental_total 
+        \end{statax}
+        we have
+        
+        \includegraphics[width=0.8\textwidth]{2-1-5.png}
+        
+         From the diagram we know $$\text{p-Value = P(P>|t|)} = 0.023$$
+        which is smaller than the significance-level $$\text{p-Value} < \alpha = 0.1$$
+        thus we could reject $H_0$. 
+        
+         As a result, there is significance evidence that the renting-in and renting-out have quite different effects. 
+
+        \item The $R^2$ in question 3 is $0.0036$, while the previous one is $0.0017$. Thus $R^2$ in question 3 higher than that of the original regression.
+
+         $R^2$ is not good enough as a guarantee to include the variables, for the following reasons:
+        \begin{itemize}
+            \item There could be other confusing omitted variables;
+            \item The model could be over-fitting and less effective with new data;
+            \item The model is too complex to analyze and interpret.
+        \end{itemize}
+        
+    \end{enumerate}
+    \textbf{Appendix: }Here is the \textbf{.do File} for Problem 1.
+    \begin{statax}
+    use "/Users/kevinshuey/Github/Assignments/cuhksz_ECO3121/as2/aghousehold.dta"
+    gen yield=d32/d31
+    gen rental_in_share = c10/d31*100
+    gen rental_out_share = c13/d31*100
+    
+    egen mean_f9 = mean(f9)
+    replace f9 = mean_f9 if f9 == .
+    drop mean_f9
+    
+    egen mean_f25 = mean(f25)
+    replace f25 = mean_f25 if f25 == .
+    drop mean_f25
+    
+    egen mean_f29 = mean(f29)
+    replace f29 = mean_f29 if f29 == .
+    drop mean_f29
+    
+    reg yield rental_in_share rental_out_share f9 f25 f29
+    
+    reg yield huzhu_edu
+    
+    gen rental_total = rental_in_share + rental_out_share
+    reg yield rental_in_share rental_total 
+    \end{statax}
+\end{numedquestion}
+
+%problem2
+\begin{numedquestion}
+    \begin{enumerate}
+        \item I don't think that $E(u_i|X_i) = 0$, as the $u_i$ could be correlated with $X_i$, for the reason that an important independent variable $W_i$ contains within $u_i$. Under this circumstance,  $u_i$ and $X_i$ are not independent with each other, causing $\beta_1$ to be biased. 
+
+        \item \begin{alphaparts}
+            \item Since $X_i$ is randomly and equally assigned, we could still believe that $E(u_i|X_i)$ does not depend on $X_i$, thus $\beta_1$ is unbiased.
+            \item From the sample, $50\%$ of the coastal regions are assigned treated group, while only $20\%$ of inland ones. Under this circumstance, there could be some unobserved independent variables specific in some regions, hence $E(u_i|X_i)$ may depend on $W_i$.
+        \end{alphaparts}
+    \end{enumerate}
+\end{numedquestion}
+
+\begin{numedquestion}
+    \begin{enumerate}
+        %1
+        \item We have the least squares function to be
+        $$LS(\beta_1, \beta_2) = \sum_{i=1}^{n} (Y_i - \beta_1 X_{1i} - \beta_2 X_{2i})^2$$
+       
+        %2
+        \item We have the partial derivatives as 
+        $$\frac{\partial LS}{\partial \beta_1} = -2\sum_{i=1}^{n} X_{1i}(Y_i - \beta_1 X_{1i} - \beta_2 X_{2i})$$
+        $$\frac{\partial LS}{\partial \beta_2} = -2\sum_{i=1}^{n} X_{2i}(Y_i - \beta_1 X_{1i} - \beta_2 X_{2i})$$
+        
+        %3
+        \item Set the partial derivative equal to zero, we have 
+        $$\sum_{i=1}^{n} X_{1i}Y_i = \beta_1 \sum_{i=1}^{n} X_{1i}^2 + \beta_2 \sum_{i=1}^{n} X_{1i}X_{2i}$$
+         Since $\sum_{i=1}^{n} X_{1i}X_{2i}= 0$, we could see that
+        $$\hat{\beta_1} = -\frac{\sum_{i=1}^{n} X_{1i}Y_i}{\sum_{i=1}^{n} X_{1i}^2}$$
+        
+        %4
+        \item Since $\sum_{i=1}^{n} X_{1i}X_{2i}\neq 0$,  first we get
+        $$\hat{\beta_2} = -\frac{\sum_{i=1}^{n} X_{2i}Y_i-\beta_1\sum_{i=1}^{n} X_{1i}X_{2i}}{\sum_{i=1}^{n} X_{2i}^2}$$
+         Taking into another equation, we have the expression to be
+        $$\sum_{i=1}^{n} X_{1i}Y_i = \beta_1 \sum_{i=1}^{n} X_{1i}^2 -\frac{\sum_{i=1}^{n} X_{2i}Y_i-\beta_1\sum_{i=1}^{n} X_{1i}X_{2i}}{\sum_{i=1}^{n} X_{2i}^2} \sum_{i=1}^{n} X_{1i}X_{2i}$$
+
+        %5 
+        \item By adding all equations and divide it by $n$, we have
+        $$\frac{1}{n}\sum_{i=1}^{n} Y_i - \frac{1}{n} \cdot n \cdot \hat{\beta_0} - \frac{1}{n} \hat{\beta_1} \sum_{i=1}^{n} x_i - \frac{1}{n}\sum_{i=1}^{n} = 0$$
+        which is equivalent to
+        $$\bar{Y} = \hat{\beta_0}0 +\hat{\beta_1} \bar{X_1}+\hat{\beta_2}\bar{X_2}+\bar{u}$$
+         In OLS regression, we have the expected residual
+        $$E(u_i)=0$$ thus we get
+        $$\hat{\beta_0} = \bar{Y}-\hat{\beta_1} \bar{X_1}-\hat{\beta_2}\bar{X_2}$$
+
+        %6
+        \item First we construct the error from the mean for each term
+            \begin{align*}
+            Y_i - \bar{Y} &= \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} - \bar{Y} + u_i\\
+            &= \beta_0 - \bar{Y} + \beta_1 X_{1i} + \beta_2 X_{2i}  + u_i\\
+            &= \beta_0 - \bar{Y} + \beta_1 (X_{1i} - \bar{X_1} + \bar{X_1}) + \beta_2 (X_{2i} - \bar{X_2} + \bar{X_2}) + u_i\\
+            &= (\beta_0 - \bar{Y} + \beta_1 \bar{X_1} + \beta_2 \bar{X_2}) + \beta_1 (X_{1i} - \bar{X_1}) + \beta_2 (X_{2i} - \bar{X_2}) + u_i
+            \end{align*}
+        As $$\hat{\beta_0} = \bar{Y}-\hat{\beta_1} \bar{X_1}-\hat{\beta_2}\bar{X_2}$$
+        we have $$Y_i - \bar{Y} = \beta_1 (X_{1i} - \bar{X_1}) + \beta_2 (X_{2i} - \bar{X_2}) + u_i$$
+        Then we get SSR as
+        $$\sum_{i=1}^{n}{(Y_i - \bar{Y})^2} = \sum_{i=1}^{n}[\beta_1 (X_{1i} - \bar{X_1}) + \beta_2 (X_{2i} - \bar{X_2}) + u_i]^2$$
+        To derive an appropriate $\hat{\beta_1}$, we need to partial out the $\beta_1$. 
+        
+        As the expectation of the residual is $0$, all intersection terms concerning $u_i$ will not take effect.  
+        
+        As $$\sum_{i=1}^{n} (X_{1i} - \bar{X_1})(X_{2i} - \bar{X_2}) = 0$$
+        all the intersection terms between $X_{1i}$ and $X_{2i}$ will not take effect as well.
+        
+        As a result, the effect-equivalent equation for $\hat{\beta_1}$ could just be simplified as $$\sum_{i=1}^{n} (Y_i - \bar{Y}) = \beta_1 \sum_{i=1}^{n} (X_{1i} - \bar{X_1})$$
+        Multiplying $(X_{1i} - \bar{X_1})$ on both sides,
+        $$\sum_{i=1}^{n} (X_{1i} - \bar{X_1})(Y_i - \bar{Y}) = \beta_1 \sum_{i=1}^{n} (X_{1i} - \bar{X_1})^2$$
+        Finally we derive
+        $$\beta_1 = \frac{\sum_{i=1}^{n} (X_{1i} - \bar{X_1})(Y_i - \bar{Y})}{\sum_{i=1}^{n} (X_{1i} - \bar{X_1})^2}$$
+        
+        Compared to the OLS estimator of $\beta_1$ from the regression that omits $X_2$, it seems identical between the two, under the implication that the two variable $X_1$, $X_2$ are not correlated (which is what $\sum_{i=1}^{n} (X_{1i} - \bar{X_1})(X_{2i} - \bar{X_2}) = 0$ implies).
+  \end{enumerate}
+    
+\end{numedquestion}   \centerline{\textbf{********************* This is the end of Problem Set 2. *********************}}
+
+
+\end{document}
