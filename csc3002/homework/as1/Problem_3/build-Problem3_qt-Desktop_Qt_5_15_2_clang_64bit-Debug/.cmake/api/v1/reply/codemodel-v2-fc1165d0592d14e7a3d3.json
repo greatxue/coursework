@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-8bd711a212b4b888fb6e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Problem3_qt",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Problem3_qt::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Problem3_qt-Debug-e8da20c17ac4d2061fe4.json",
+					"name" : "Problem3_qt",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Problem3_qt_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Problem3_qt_autogen-Debug-a272089ce3f8cbe9cb48.json",
+					"name" : "Problem3_qt_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Problem3_qt_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Problem3_qt_autogen_timestamp_deps-Debug-8dfe6720e8ed0ada2aeb.json",
+					"name" : "Problem3_qt_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem_3/build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug",
+		"source" : "/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem_3/Problem3_qt"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

@@ -1,0 +1,900 @@
+\documentclass[11pt]{exam}
+\newcommand{\myname}{Xue Zhongkai} %Write your name in here
+\newcommand{\myUCO}{122090636} %write your UCO in here
+\newcommand{\myhwtype}{Homework}
+\newcommand{\myhwnum}{2} %Homework set number
+\newcommand{\myclass}{MAT2040}
+\newcommand{\mylecture}{}
+\newcommand{\mysection}{}
+
+% Prefix for numedquestion's
+\newcommand{\questiontype}{Question}
+
+% Use this if your "written" questions are all under one section
+% For example, if the homework handout has Section 5: Written Questions
+% and all questions are 5.1, 5.2, 5.3, etc. set this to 5
+% Use for 0 no prefix. Redefine as needed per-question.
+\newcommand{\writtensection}{0}
+\usepackage{arydshln}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  % Some math symbols
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[all]{xy}
+\usepackage{wrapfig}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\usepackage{centernot}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{\vert}{\vert}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\pagestyle{empty}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
+    \addtocounter{questionCounter}{1}%
+    \setcounter{partCounter}{0}%
+    \vspace{.2in}%
+        \noindent{\bf #1}%
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{numedquestion}[0]{%
+	\stepcounter{questionCounter}%
+    \vspace{.2in}%
+        \ifx\writtensection\undefined
+        \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+        \else
+          \if\writtensection0
+          \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+          \else
+          \noindent{\bf \questiontype \; \writtensection.\arabic{questionCounter} }%
+        \fi
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{alphaparts}[0]{%
+  \begin{enumerate}[label=\textbf{(\alph*)}]
+}{\end{enumerate}}
+
+\newenvironment{arabicparts}[0]{%
+  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*})]
+}{\end{enumerate}}
+
+\newenvironment{questionpart}[0]{%
+  \item
+}{}
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\vspace{#1}
+\end{framed}}
+
+\pagestyle{head}
+
+\headrule
+\header{\textbf{\myclass\ \mylecture\mysection}}%
+{\textbf{\myname\ (\myUCO)}}%
+{\textbf{\myhwtype\ \myhwnum}}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+  {\Large \myclass{} \myhwtype{} \myhwnum} \\
+  \myname{} (\myUCO{}) \\
+  \today
+\end{center}
+
+
+% Question 1
+\begin{numedquestion} 
+    Define the matrix to be
+        $B = 
+        \begin{bmatrix} 
+        a & b \\ 
+        b & c 
+        \end{bmatrix} (a, b, c \neq 0),$ then
+        $$B^2 = 
+        \begin{bmatrix} 
+        a^2 + b^2 & ab + bc \\ 
+        ab + bc & b^2 +c^2
+        \end{bmatrix} .$$ 
+    If $B^2 = O$, we have
+    $$ \left \{    
+    \begin{aligned}
+    a^2 + b^2 &\neq 0 \\
+    ab + bc &\neq 0 \\
+    b^2 +c^2 &\neq 0
+    \end{aligned}
+    \right. \Rightarrow
+    \left \{    
+    \begin{aligned}
+    a &\neq 0 \\
+    b &\neq 0 \\
+    c &\neq 0
+    \end{aligned}
+    \right.,
+    $$
+    \hspace{1em}which is a contradiction to the basic assumption $a, b, c \neq 0$.
+    
+    Thus it is NOT possible for a nonzero symmetric $2 \times 2$ matrix to have this property.
+\end{numedquestion}
+
+% Question 2
+\begin{numedquestion}
+    \begin{alphaparts}
+        \item  We have 
+        $$A^T = (C+C^T)^T = C^T +(C^T)^T = C^T + C = A$$
+        Thus it must be necessarily symmetric.
+    
+        \item We have
+        $$B^T = (C-C^T)^T = C^T -(C^T)^T = C^T - C \neq A$$
+        Thus it could possibly be non-symmetric.
+    
+        \item We have
+        $$D^T = (C^TC)^T = C^T (C^T)^T = C^TC = D$$
+        Thus it must be necessarily symmetric.
+
+        \item We have
+        $$E^T = (C^TC-CC^T)^T = (C^TC)^T-(CC^T)^T = C^TC-CC^T = E$$
+        Thus it must be necessarily symmetric.
+
+        \item We have
+        $$F^T = [(I+C)(I+C^T)]^T = (I+C^T)^T(I+C)^T = (I+C)(I+C^T) = F$$
+        Thus it must be necessarily symmetric.
+
+        \item We have
+        $$F^T = [(I+C)(I-C^T)]^T = (I-C^T)^T(I+C)^T = (I-C)(I+C^T) = F$$
+        Thus it could possibly be non-symmetric.
+
+    \end{alphaparts}
+\end{numedquestion}  
+
+% Question 3
+\begin{numedquestion}
+We have the assumption that 
+    $$M=\frac{1}{d} \cdot
+    \begin{bmatrix} 
+        a_{22} & -a_{12} \\ 
+        -a_{21} & a_{11} 
+    \end{bmatrix}$$
+It is equivalent to show
+    $$A^{-1} = M,$$
+    \hspace{1em}which is equivalent to
+    $$MA = I$$
+Thus we have
+    \begin{align*}
+     MA &= \frac{1}{d} \cdot
+    \begin{bmatrix} 
+        a_{22} & -a_{12} \\ 
+        -a_{21} & a_{11} 
+    \end{bmatrix}
+    \begin{bmatrix} 
+        a_{11} & a_{12} \\ 
+        a_{21} & a_{22} 
+    \end{bmatrix} \\
+    &= \frac{1}{a_{11}a_{22} - a_{21}a_{12}}
+    \begin{bmatrix} 
+        a_{22} & -a_{12} \\ 
+        -a_{21} & a_{11} 
+    \end{bmatrix}
+    \begin{bmatrix} 
+        a_{11} & a_{12} \\ 
+        a_{21} & a_{22} 
+    \end{bmatrix} \\
+    &= \frac{1}{a_{11}a_{22} - a_{21}a_{12}}
+    \begin{bmatrix} 
+        a_{22}a_{11}-a_{12}a_{21} & 0 \\ 
+        0 & a_{22}a_{11}-a_{12}a_{21} 
+    \end{bmatrix}  \\
+    &= \begin{bmatrix} 
+        1 & 0 \\ 
+        0 & 1 
+    \end{bmatrix} \\
+    &= I
+    \end{align*}
+    As a result, the proposition holds true.
+\end{numedquestion}  
+
+% Question 4
+\begin{numedquestion}
+    If $A$ is NOT singular, then there exists $A^{-1}$.
+    
+    Multiplying $A^{-1}$ on both sides,
+    $$A^{-1}AB = A^{-1}A$$
+    \hspace{1em}thus we have
+    $$B=I$$
+    It is a contradiction to $B \neq I$, thus A must be singular.
+\end{numedquestion}
+
+% Question 5
+\begin{numedquestion}
+    If $A$ is non-singular, then
+    $$AB = I$$
+    It is equivalent to
+    $$(AB)^T = I^T$$
+    \hspace{1em}then $$B^TA^T = I$$
+    Thus $A^T$ is non-singular as well.
+    We have 
+    $$A^T(A^{-1})^T = (A^{-1}A)^T = I^T = I$$
+    \hspace{1em}and
+    $$(A^{-1})^TA^T = (AA^{-1})^T = I^T = I$$
+    As the transpose of a matrix is unique,
+    we have
+    $$(A^{-1})^T = (A^T)^{-1}$$
+\end{numedquestion}
+
+% Question 6
+\begin{numedquestion}
+    We have
+    $$(A^TA)^T = A^T (A^T)^T = A^TA$$
+    \hspace{1em}and
+    $$(AA^T)^T = (A^T)^TA^T = AA^T$$
+    Thus $A^TA$ and $AA^T$ are both symmetric.
+\end{numedquestion}
+
+% Question 7
+\begin{numedquestion}
+    \begin{alphaparts}
+        \item We have the elementary row operation to be
+        $$R_3 \rightarrow R_1+R_3$$
+        Thus we have  
+    $$E=\begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            0 & 1 & 0  \\
+            1 & 0 & 1   
+        \end{bmatrix}$$
+
+        \item We have the elementary row operation to be
+        $$R_2 \rightarrow -R_3+R_2$$
+        Thus we have 
+    $$E=\begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            0 & 1 & -1  \\
+            0 & 0 & 1   
+        \end{bmatrix}$$
+        \item For a given matrix $A$, performing row operations for $A$ is equivalent to pre-multiplying $A$ by the corresponding elementary matrix, thus $C$ must be row equivalent to $A$.
+    \end{alphaparts}
+\end{numedquestion}
+
+
+% Question 8
+\begin{numedquestion}
+    \begin{alphaparts}
+    \item We have the matrix to be
+      $$\begin{bmatrix} 
+            2 & 1 & 1  \\ 
+            6 & 4 & 5  \\
+            4 & 1 & 3   
+        \end{bmatrix} \xrightarrow[R_3 \rightarrow -2R_1 + R_3]{R_2 \rightarrow -3R_1 + R_2}
+        \begin{bmatrix} 
+            2 & 1 & 1  \\ 
+            0 & 1 & 2  \\
+            0 & -1 & 1   
+        \end{bmatrix} \xrightarrow{R_3 \rightarrow R_2 + R_3}
+        \begin{bmatrix} 
+            2 & 1 & 1  \\ 
+            0 & 1 & 2  \\
+            0 & 0 & 3  
+        \end{bmatrix} = U$$
+   The corresponding elementary matrices are
+   $$E_1 = \begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            -3 & 1 & 0  \\
+            0 & 0 & 1    
+        \end{bmatrix},\quad
+     E_2 = \begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            0 & 1 & 0  \\
+            -2 & 0 & 1    
+        \end{bmatrix},\quad
+     E_3 = \begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            0 & 1 & 0  \\
+            0 & 1 & 1    
+        \end{bmatrix}$$
+    \item We have inverse of matrices $E_1, E_2, E_3$ to be
+    $$\left \{    
+    \begin{aligned}
+    E_1 &= E_{-3R_1 + R_2} \\
+    E_2 &= E_{-2R_1 + R_3} \\
+    E_3 &= E_{R_2 + R_3}
+    \end{aligned}
+    \right. \Rightarrow
+    \left \{    
+    \begin{aligned}
+    E_1^{-1} &= E_{3R_1 + R_2} \\
+    E_2^{-1} &= E_{2R_1 + R_3} \\
+    E_3^{-1} &= E_{-R_2 + R_3}
+    \end{aligned}  
+    \right. 
+    $$
+    The corresponding elementary matrices are
+   $$E_1^{-1} = \begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            3 & 1 & 0  \\
+            0 & 0 & 1    
+        \end{bmatrix},\quad
+     E_2^{-1} = \begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            0 & 1 & 0  \\
+            2 & 0 & 1    
+        \end{bmatrix},\quad
+     E_3^{-1} = \begin{bmatrix} 
+            1 & 0 & 0  \\ 
+            0 & 1 & 0  \\
+            0 & -1 & 1    
+        \end{bmatrix}$$
+    We have 
+    $$L = E_1^{-1} E_2^{-1} E_3^{-1} = 
+       \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            3 & 1 & 0  \\
+            2 & -1 & 1    
+        \end{bmatrix}$$
+    For verification, we have
+    $$L U = \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            3 & 1 & 0  \\
+            2 & -1 & 1    
+        \end{bmatrix}
+        \begin{bmatrix} 
+            2 & 1 & 1  \\ 
+            0 & 1 & 2  \\
+            0 & 0 & 3  
+        \end{bmatrix}
+        = \begin{bmatrix} 
+            2 & 1 & 1  \\ 
+            6 & 4 & 5  \\
+            4 & 1 & 3  
+        \end{bmatrix} = A
+    $$
+    \end{alphaparts}
+\end{numedquestion}
+
+% Question 9
+\begin{numedquestion}
+    \begin{alphaparts}
+        \item First we calculate $A^{-1}$, as
+        $$ [A|I] =
+        \left[\begin{array}{cc|cc}
+       2 & 1 & 1 & 0 \\
+       6 & 4 & 0 & 1
+        \end{array} \right] \Rightarrow 
+        \left[\begin{array}{cc|cc}
+       1 & 0 & 2 & -\frac{1}{2} \\
+       0 & 1 & -3 & 1
+        \end{array} \right]$$
+    We have row operations as
+    $$A^{-1} = 
+        \begin{bmatrix} 
+            2 & -\frac{1}{2} \\ 
+            -3 & 1   
+        \end{bmatrix} \xrightarrow{R_1 \rightarrow \frac{1}{2}R_1}
+        \begin{bmatrix} 
+            1 & -\frac{1}{4} \\ 
+            -3 & 1   
+        \end{bmatrix} \xrightarrow{R_2 \rightarrow 3R_1 + R_2}
+        \begin{bmatrix} 
+            1 & -\frac{1}{4} \\ 
+            0 & \frac{1}{4}  
+        \end{bmatrix} \xrightarrow{R_2 \rightarrow 4R_2}
+        \begin{bmatrix} 
+            1 & -\frac{1}{4} \\ 
+            0 & 1
+        \end{bmatrix} \xrightarrow{R_1 \rightarrow \frac{1}{4}R_2 + R_1}
+        \begin{bmatrix} 
+            1 & 0 \\ 
+            0 & 1
+        \end{bmatrix}$$
+    Thus we have
+    $$A^{-1} = E_{\frac{1}{2}R_1}^{-1} \cdot E_{3R_1 + R_2}^{-1} \cdot E_{4R_2}^{-1} \cdot E_{\frac{1}{4}R_2 + R_1}^{-1} $$
+    That is, 
+    $$A^{-1} = 
+        \begin{bmatrix} 
+            -\frac{1}{2} & 0 \\ 
+            0 & 1  
+        \end{bmatrix}
+        \begin{bmatrix} 
+            1 & 0 \\ 
+            -3 & 1  
+        \end{bmatrix}
+        \begin{bmatrix} 
+            1 & 0 \\ 
+            0 & -4  
+        \end{bmatrix}
+        \begin{bmatrix} 
+            1 & -\frac{1}{4} \\ 
+            0 & 1  
+        \end{bmatrix}$$
+    
+        \item We have
+    $$A = \begin{bmatrix} 
+            2 & 1 \\ 
+            6 & 4  
+        \end{bmatrix}
+        \xrightarrow{R_1 \rightarrow \frac{1}{2}R_1}
+        \begin{bmatrix} 
+            1 & \frac{1}{2} \\ 
+            6 & 4
+        \end{bmatrix} \xrightarrow{R_2 \rightarrow -6R_1 + R_2}
+        \begin{bmatrix} 
+            1 & \frac{1}{2} \\ 
+            0 & 1  
+        \end{bmatrix} \xrightarrow{R_1 \rightarrow -\frac{1}{2}R_2 + R_1}
+        \begin{bmatrix} 
+            1 & -\frac{1}{4} \\ 
+            0 & 1
+        \end{bmatrix} \xrightarrow{R_1 \rightarrow \frac{1}{4}R_2 + R_1}
+        \begin{bmatrix} 
+            1 & 0 \\ 
+            0 & 1
+        \end{bmatrix}$$
+        Thus,
+        $$A = 
+        \begin{bmatrix} 
+            -\frac{1}{2} & 0 \\ 
+            0 & 1  
+        \end{bmatrix}
+        \begin{bmatrix} 
+            1 & 0 \\ 
+            6 & 1  
+        \end{bmatrix}
+        \begin{bmatrix} 
+            1 & 0 \\ 
+            0 & \frac{1}{2}  
+        \end{bmatrix}
+        \begin{bmatrix} 
+            1 & -\frac{1}{4} \\ 
+            0 & 1  
+        \end{bmatrix}$$
+    \end{alphaparts}
+\end{numedquestion} 
+
+% Question 10
+\begin{numedquestion}
+    \begin{alphaparts}
+        % a
+        \item We have the row operation as 
+        $$\begin{bmatrix} 
+            3 & 1 \\ 
+            9 & 5  
+        \end{bmatrix} \xrightarrow{R_2 \rightarrow -3R_1 + R_2}
+        \begin{bmatrix} 
+            3 & 1 \\ 
+            0 & 2  
+        \end{bmatrix}$$
+        Thus we have
+        $$\begin{bmatrix} 
+            3 & 1 \\ 
+            9 & 5  
+          \end{bmatrix} = 
+          \begin{bmatrix} 
+            1 & 0 \\ 
+            3 & 1  
+          \end{bmatrix} \cdot 
+          \begin{bmatrix} 
+            3 & 1 \\ 
+            0 & 2
+          \end{bmatrix}$$
+        % b
+        \item We have the row operation as      
+        $$\begin{bmatrix} 
+            2 & 4 \\ 
+            -2 & 1  
+        \end{bmatrix} \xrightarrow{R_2 \rightarrow R_1 + R_2}
+        \begin{bmatrix} 
+            2 & 4 \\ 
+            0 & 5  
+        \end{bmatrix}$$
+        Thus we have
+        $$\begin{bmatrix} 
+            2 & 4 \\ 
+            -2 & 1  
+          \end{bmatrix} = 
+          \begin{bmatrix} 
+            1 & 0 \\ 
+            -1 & 1  
+          \end{bmatrix} \cdot 
+          \begin{bmatrix} 
+            2 & 4 \\ 
+            0 & 5  
+          \end{bmatrix}$$
+        % c
+        \item We have the row operations as      
+        $$\begin{bmatrix} 
+            1 & 1 & 1 \\ 
+            3 & 5 & 6 \\
+            -2 & 2 & 7
+        \end{bmatrix} \xrightarrow[R_3 \rightarrow 2R_1 + R_3]{R_2 \rightarrow -3R_1 + R_2}
+        \begin{bmatrix} 
+            1 & 1 & 1 \\ 
+            0 & 2 & 3 \\
+            0 & 4 & 9  
+        \end{bmatrix} \xrightarrow{R_3 \rightarrow -2R_2 + R_3}
+        \begin{bmatrix} 
+            1 & 1 & 1 \\ 
+            0 & 2 & 3 \\
+            0 & 0 & 3  
+        \end{bmatrix} $$
+        Thus we have
+        $$\begin{bmatrix} 
+            1 & 1 & 1 \\ 
+            3 & 5 & 6 \\
+            -2 & 2 & 7
+          \end{bmatrix} = 
+          \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            3 & 1 & 0 \\
+            0 & 0 & 1
+          \end{bmatrix}  
+          \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            0 & 1 & 0 \\
+            -2 & 0 & 1
+          \end{bmatrix} 
+          \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            0 & 1 & 0 \\
+            0 & 2 & 1
+          \end{bmatrix} \cdot
+          \begin{bmatrix} 
+            1 & 1 & 1 \\ 
+            0 & 2 & 3 \\
+            0 & 0 & 3  
+          \end{bmatrix}
+          $$
+        % d
+        \item We have the row operations as      
+        $$\begin{bmatrix} 
+            -2 & 1 & 2 \\ 
+             4 & 1 & -2 \\
+            -6 & -3 & 4
+        \end{bmatrix} \xrightarrow[R_3 \rightarrow -3R_1 + R_3]{R_2 \rightarrow 2R_1 + R_2}
+        \begin{bmatrix} 
+            -2 & 1  & 2 \\ 
+             0 & -1 & 2 \\
+             0 & -6 & -2
+        \end{bmatrix} \xrightarrow{R_3 \rightarrow -6R_2 + R_3}
+        \begin{bmatrix} 
+            -2 & 1 & 2 \\ 
+            0 & -1 & 2 \\
+            0 & 0 & -14  
+        \end{bmatrix} $$
+        Thus we have
+        $$\begin{bmatrix} 
+            -2 & 1 & 2 \\ 
+             4 & 1 & -2 \\
+            -6 & -3 & 4
+          \end{bmatrix} = 
+          \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            -2 & 1 & 0 \\
+            0 & 0 & 1
+          \end{bmatrix}  
+          \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            0 & 1 & 0 \\
+            3 & 0 & 1
+          \end{bmatrix} 
+          \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            0 & 1 & 0 \\
+            0 & 6 & 1
+          \end{bmatrix} \cdot
+          \begin{bmatrix} 
+            -2 & 1 & 2 \\ 
+            0 & -1 & 2 \\
+            0 & 0 & -14
+          \end{bmatrix}
+          $$
+    \end{alphaparts}
+
+% Question 11
+\end{numedquestion} 
+\begin{numedquestion}
+    \begin{alphaparts}
+        \item If $A$ is non-singular, then $$AB = I$$
+        It is equivalent to
+        $$(AB)^{-1} = I^{-1}$$
+        \hspace{1em}then $$B^{-1}A^{-1} = I$$
+        Thus $A^{-1}$ is non-singular as well. We have 
+        $$A A^{-1}x
+        = I$$
+        \hspace{1em}and
+        $$(A^{-1})^{-1}A^{-1} = (AA^{-1})^{-1} = I^{-1} = I$$
+        As the inverse of a matrix is unique,
+        we have
+        $$(A^{-1})^{-1} = A$$
+        \item If $A$ is non-singular, then
+        $$AB = I$$
+        It is equivalent to
+        $$(AB)^T = I^T$$
+        \hspace{1em}then $$B^TA^T = I$$
+        Thus $A^T$ is non-singular as well.
+        We have 
+        $$A^T(A^{-1})^T = (A^{-1}A)^T = I^T = I$$
+        \hspace{1em}and
+        $$(A^{-1})^TA^T = (AA^{-1})^T = I^T = I$$
+        As the transpose of a matrix is unique,
+        we have
+        $$(A^{-1})^T = (A^T)^{-1}$$
+    \end{alphaparts}
+\end{numedquestion}
+
+% Question 12
+\begin{numedquestion}
+    The system has infinitely many solutions. The solution is equivalent to 
+    $$A\begin{bmatrix} 
+            2m \\  m \\ -4m
+        \end{bmatrix} = 0$$
+    \hspace{1em} and it still holds for any other $\mathbf{x}$ satisfying the given condition.
+    
+    If $A$ is invertible, then the system has a unique solution for $\mathbf{x}$, but we have infinite solutions.
+
+    Thus we have infinitely many solutions, and $A$ is singular.
+\end{numedquestion}
+
+% Question 13
+\begin{numedquestion}
+    Since A is symmetric and non-singular, we have
+    $$A^T = A$$
+    \hspace{1em}and
+    $$AA^{-1} = I$$
+    First, we have
+    $$(A^{-1})^T A^T = (AA^{-1})^T = I$$
+    \hspace{1em} Substitute $A^T$ with $A$, we have
+    \begin{equation}
+        (A^{-1})^T A = I
+    \end{equation}
+    We also have 
+    \begin{equation}
+        A^{-1} A = I
+    \end{equation}
+    By (1) and (2), we have
+    $$(A^{-1})^T A=A^{-1} A$$
+    \hspace{1em} Multiply $A^{-1}$ on both sides, we have
+    $$(A^{-1})^T =A^{-1} $$
+    Thus $A^{-1}$ is also symmetric.
+\end{numedquestion}
+
+% Question 14
+\begin{numedquestion}
+    First prove: $B$ is row equivalent to $A$ $\Rightarrow B = MA$ ($M$ is non-singular)
+    
+    \hspace{1em} Since $A$ is row equivalent to $B$, there exists a set of elementary matrices such that
+    $$B = E_k E_{k-1}...E_1 A$$
+    \hspace{1em} As the product of elementary matrices is invertible, we can rewrite like
+    $$B = MA \quad (M \text{ is non-singular})$$
+    
+    Also prove: $B = MA$ ($M$ is non-singular) $\Rightarrow$ $B$ is row equivalent to $A$ 
+    
+    \hspace{1em} As a non-singular matrix, it could be decomposed as elementary matrices like
+    $$M = E_k E_{k-1}...E_1$$
+    \hspace{1em} Thus we have
+    $$B = E_k E_{k-1}...E_1 A$$
+    \hspace{1em} which indicates that $A$ is row equivalent to $B$.
+    
+    Thus the proposition is proved.
+\end{numedquestion}
+
+% Question 15
+\begin{numedquestion}
+    \begin{alphaparts}
+        \item We have the multiplication to be
+        \begin{align*}
+        \text{Multiplication} &=    
+          \begin{bmatrix} 
+            1 & 1 & 1 \\ 
+            2 & 1 & 2 
+          \end{bmatrix}
+            \begin{bmatrix} 
+            4 & -2 & 1 \\ 
+            2 & 3 & 1 \\
+            1 & 1 & 2
+          \end{bmatrix} + 
+          \begin{bmatrix} 
+            -1 \\ -1 
+          \end{bmatrix}
+          \begin{bmatrix} 
+            1 & 2 & 3  
+          \end{bmatrix} \\
+          &= 
+          \begin{bmatrix} 
+            7 & 2 & 4 \\ 
+            12 & 1 & 7
+          \end{bmatrix} + 
+          \begin{bmatrix} 
+            -1 & -2 & -3  \\
+            -1 & -2 & -3  
+          \end{bmatrix} \\
+          &= 
+          \begin{bmatrix} 
+            6 & 0 & 1 \\ 
+            11 & -1 & 4 
+          \end{bmatrix}
+          \end{align*}
+
+          
+        \item We have the multiplication to be
+        $$\left[\begin{array}{cc|cc} 
+            1 & 2 & 0 & -2 \\ 
+            8 & 5 & 8 & -5 \\
+            \hline
+            3 & 2 & 3 & -2 \\
+            5 & 3 & 5 & -3
+          \end{array}\right]$$ 
+
+     \item We have   
+          $$\begin{bmatrix} 
+                \frac{3}{5} & -\frac{4}{5} \\ 
+                \frac{4}{5} & \frac{3}{5}  
+            \end{bmatrix}
+            \begin{bmatrix} 
+                \frac{3}{5} & \frac{4}{5} \\ 
+                -\frac{4}{5} & \frac{3}{5}  
+            \end{bmatrix} = 
+            \begin{bmatrix} 
+                1 & 0 \\ 
+                0 & 1  
+            \end{bmatrix}
+          $$
+          \hspace{1em} and
+          $$\begin{bmatrix} 
+            1 & 0
+          \end{bmatrix}
+          \begin{bmatrix} 
+            1 \\ 0 
+          \end{bmatrix} \\= 
+          1$$ 
+          Thus we have the multiplication to be
+          $$\left[\begin{array}{cc|cc} 
+            1 & 0 & 0  \\ 
+            0 & 1 & 0  \\
+            \hline
+            0 & 0 & 1  \\
+            
+          \end{array}\right]$$ 
+
+        \item We have 
+           
+          $$\begin{bmatrix} 
+            0 & 0 & 1 \\ 
+            0 & 1 & 0  \\
+            1 & 0 & 0
+          \end{bmatrix}
+            \begin{bmatrix} 
+            1 & -1 \\ 
+            2 & -2 \\
+            3 & -3
+          \end{bmatrix} = 
+          \begin{bmatrix} 
+            3 & -3 \\ 
+            2 & -2 \\
+            1 & -1
+          \end{bmatrix}
+          $$
+          \hspace{1em} and
+          $$
+          \begin{bmatrix} 
+            0 & 1 \\ 
+            1 & 0 
+          \end{bmatrix}
+          \begin{bmatrix} 
+            4 & -4 \\ 
+            5 & -5
+          \end{bmatrix} =
+          \begin{bmatrix} 
+            5 & -5   \\
+            4 & -4  
+          \end{bmatrix} $$
+          Thus we have the multiplication to be
+          $$\left[\begin{array}{cc} 
+            3 & -3  \\ 
+            2 & -2  \\
+            1 & -1  \\
+            \hline
+            5 & -5  \\
+            4 & -4  
+          \end{array}\right]$$ 
+    \end{alphaparts}
+\end{numedquestion}
+
+% Question 16
+\begin{numedquestion}
+    Given $B$ is singular, there exists a non-zero vector$\mathbf{x}$ such that
+    $$B\mathbf{x}=0$$
+    If $C=AB$, then we have
+    $$C\mathbf{x} = AB\mathbf{x} = A0 = 0$$
+    Thus $C$ is also singular.
+\end{numedquestion}
+
+% Question 17
+\begin{numedquestion}
+    \begin{alphaparts}
+    \item  Since $A_{11}$ and $A_{12}$ are non-singular,
+    we define $$C=-A_{11}^{-1} A_{12} A_{22}^{-1}$$
+    Hence we have
+    $$\begin{bmatrix} 
+        A_{11}^{-1} & C \\ 
+        0 & A_{22}^{-1}
+      \end{bmatrix}
+      \begin{bmatrix} 
+        A_{11} & A_{12} \\ 
+        0 & A_{22}
+      \end{bmatrix}=
+      \begin{bmatrix} 
+        A_{11} & A_{12} \\ 
+        0 & A_{22}
+      \end{bmatrix}
+      \begin{bmatrix} 
+        A_{11}^{-1} & C \\ 
+        0 & A_{22}^{-1}
+      \end{bmatrix} = I_{2n}$$
+      
+      \item As stated, $$C=-A_{11}^{-1} A_{12} A_{22}^{-1}$$
+      \end{alphaparts}
+\end{numedquestion}
+
+% Question 18
+\begin{numedquestion}
+    We have
+    $$A = LU = 
+    \begin{bmatrix} 
+        1 & 0 & 0 \\ 
+        -1 & 1 & 0 \\
+        -2 & -3 & 1
+      \end{bmatrix}  
+      \begin{bmatrix} 
+        1 & -1 & 1 \\ 
+        0 & 2 & -2 \\
+        0 & 0 & 3
+      \end{bmatrix}$$
+     \hspace{1em} and $$U = D\hat{U}=
+        \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            0 & 2 & 0 \\
+            0 & 0 & 3
+          \end{bmatrix}  
+          \begin{bmatrix} 
+            1 & -1 & 1 \\ 
+            0 & 1 & -1 \\
+            0 & 0 & 1
+          \end{bmatrix}$$
+    Hence, 
+    $$A = LD\hat{U}=
+    \begin{bmatrix} 
+        1 & 0 & 0 \\ 
+        -1 & 1 & 0 \\
+        -2 & -3 & 1
+      \end{bmatrix}  
+      \begin{bmatrix} 
+        1 & 0 & 0 \\ 
+        0 & 2 & 0 \\
+        0 & 0 & 3
+      \end{bmatrix}  
+      \begin{bmatrix} 
+        1 & -1 & 1 \\ 
+        0 & 1 & -1 \\
+        0 & 0 & 1
+      \end{bmatrix}$$
+    \\
+    \textbf{**This is the end of Homework 2.**}
+\end{numedquestion}
+
+
+
+\end{document}

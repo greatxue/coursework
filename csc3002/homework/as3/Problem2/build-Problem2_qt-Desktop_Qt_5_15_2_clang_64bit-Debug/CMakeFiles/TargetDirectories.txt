@@ -1,0 +1,9 @@
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem2_qt.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/edit_cache.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/list_install_components.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/install.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/install/local.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/install/strip.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem2_qt_autogen_timestamp_deps.dir
+/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as3/Problem2/build-Problem2_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem2_qt_autogen.dir
