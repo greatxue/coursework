@@ -25,8 +25,40 @@ using namespace std;
  */
 
 bool wildcardMatch(string filename, string pattern) {
-   //TODO
-   return false;
+    int n = filename.size();
+    int m = pattern.size();
+    int i = 0, j = 0;
+    int starIndex = -1, matchIndex = -1;
+
+    while (i < n) {
+        if (j < m && (filename[i] == pattern[j] || pattern[j] == '?')) {
+            // Characters match or pattern character is '?'
+            i++;
+            j++;
+        } else if (j < m && pattern[j] == '*') {
+            // Pattern character is '*', check for any sequence
+            starIndex = j;
+            matchIndex = i;
+            j++;
+        } else if (starIndex != -1) {
+            // Last pattern character was '*', but current characters don't match
+            // Try next position in string for '*'
+            j = starIndex + 1;
+            matchIndex++;
+            i = matchIndex;
+        } else {
+            // Characters don't match and no '*' to adjust positions
+            return false;
+        }
+    }
+
+    // Check for remaining characters in pattern
+    while (j < m && pattern[j] == '*') {
+        j++;
+    }
+
+    // If we have reached the end of both strings, they match
+    return j == m;
 }
 
 

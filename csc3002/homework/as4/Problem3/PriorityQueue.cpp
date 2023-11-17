@@ -9,7 +9,7 @@
 #include <string>
 // #include "CSC3002OJActive/assignment4/lib.h"
 // #include "CSC3002OJActive/assignment4/PriorityQueue.h"
-// #include "lib.h"
+#include "lib.h"
 #include "PriorityQueue.h"
 using namespace std;
 
@@ -81,7 +81,37 @@ void PriorityQueue<ValueType>::clear() {
 template <typename ValueType>
 void PriorityQueue<ValueType>::enqueue(ValueType value, double priority) {
    //TODO
+   Cell *cp = new Cell;
+   cp->data = value;
+   cp->priority = priority; 
+   cp->link = NULL; // pointer to the latter 
 
+   if (head == NULL) { // start a new queue if empty
+      head = cp;
+      count++;
+
+      return;
+   }
+
+   if (priority < head->priority) { // add to the front as a head replacement
+      cp->link = head; 
+      head = cp;
+      count++;
+
+      return;
+   }
+
+   Cell *prev = head, *front = head;
+   while (priority > front->priority && front->link) { // add in the middle or to the end
+      prev = front;
+      front = front->link;
+   }
+
+   cp->link = prev->link;
+   prev->link = cp;
+   count++;
+
+   return;
 }
 
 /*
@@ -95,14 +125,20 @@ template <typename ValueType>
 ValueType PriorityQueue<ValueType>::dequeue() {
    if (isEmpty()) error("dequeue: Attempting to dequeue an empty queue");
    //TODO
-   return 0;
+   Cell *crtHead = head;
+   head = head->link;
+   ValueType value = crtHead->data;
+   delete crtHead;
+   count--;
+   
+   return value;
 }
 
 template <typename ValueType>
 ValueType PriorityQueue<ValueType>::peek() const {
    if (isEmpty()) error("peek: Attempting to peek at an empty queue");
    //TODO
-   return 0;
+   return head->data;
 }
 
 /*

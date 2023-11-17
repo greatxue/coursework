@@ -4,8 +4,8 @@
  * This file implements EditorBuffer
  */
 #include <iostream>
-//#include "CSC3002OJActive/assignment4/buffer.h"
-//#include "CSC3002OJActive/assignment4/SimpleTextEditor.h"
+#include "CSC3002OJActive/assignment4/buffer.h"
+#include "CSC3002OJActive/assignment4/SimpleTextEditor.h"
 //#include "buffer.h"
 //#include "SimpleTextEditor.h"
 using namespace std;
@@ -38,6 +38,16 @@ EditorBuffer::EditorBuffer() {
 
 EditorBuffer::~EditorBuffer() {
    // TODO
+   Cell *cur = start->next;
+   while (cur != start) {
+      Cell *next = cur->next;
+      delete cur;
+      cur = next;
+   }
+
+   if (start != NULL) { // check to prevent double delete
+      delete start;
+}
 
 }
 
@@ -50,19 +60,23 @@ EditorBuffer::~EditorBuffer() {
 
 void EditorBuffer::moveCursorForward() {
    // TODO
+   if (cursor->next != start) cursor = cursor->next;
 }
 
 void EditorBuffer::moveCursorBackward() {
    // TODO
+   if (cursor != start) cursor = cursor->prev;
 
 }
 
 void EditorBuffer::moveCursorToStart() {
    // TODO
+   if (cursor != start->next) cursor = start;
 }
 
 void EditorBuffer::moveCursorToEnd() {
    // TODO
+   if (cursor != start->prev) cursor = start->prev;
 }
 
 /* TODO PART:
@@ -74,11 +88,23 @@ void EditorBuffer::moveCursorToEnd() {
 
 void EditorBuffer::insertCharacter(char ch) {
    // TODO
+   Cell *newCell = new Cell;
+   newCell->ch = ch; // ch is the member to insert in
+   newCell->next = cursor->next; // point the next of newCell at the cursor's next
+   newCell->prev = cursor;       // point the prev of newCell at the cursor
+   cursor->next->prev = newCell; // point the cursor's next back at newCell
+   cursor->next = newCell;       // point the next of cursor at newCell
+   cursor = newCell; // recover the cursor pointer
 }
 
 void EditorBuffer::deleteCharacter() {
    // TODO
-   
+   if (cursor->next != start) {
+      Cell *cellToDelete = cursor->next; // cursor's next is the one to delete
+      cursor->next = cellToDelete->next; // update the cursor's next
+      cellToDelete->next->prev = cursor; // point the new cursor's next back at cursor
+      delete cellToDelete; // eliminate the cellToDelete in case of dangling pointer
+   }
 }
 
 /* TODO PART:
@@ -91,11 +117,24 @@ void EditorBuffer::deleteCharacter() {
 
 string EditorBuffer::getText() const {
    // TODO
+   Cell *crt = start->next;
+   string text = "";
+   while (crt != start) { // traverse the whole linked list
+      text += crt->ch;
+      crt = crt->next;
+   }
+   return text;
 }
 
 int EditorBuffer::getCursor() const {
    // TODO
-
+   Cell *crt = start;
+   int index = 0;
+   while (crt != cursor) {
+      index++;
+      crt = crt->next;
+   }
+   return index;
 }
 
 /* DO NOT modify the main() part */
