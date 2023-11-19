@@ -1,9 +1,9 @@
 #ifndef SIMPLETEXTEDITOR_H
 #define SIMPLETEXTEDITOR_H
 
-#include <cctype>
-#include <iostream>
-#include "buffer.h"
+//#include <cctype>
+//#include <iostream>
+//#include "buffer.h"
 using namespace std;
 
 /* Function prototypes */

@@ -4,10 +4,10 @@
  * This file implements EditorBuffer
  */
 #include <iostream>
-#include "CSC3002OJActive/assignment4/buffer.h"
-#include "CSC3002OJActive/assignment4/SimpleTextEditor.h"
-//#include "buffer.h"
-//#include "SimpleTextEditor.h"
+//#include "CSC3002OJActive/assignment4/buffer.h"
+//#include "CSC3002OJActive/assignment4/SimpleTextEditor.h"
+#include "buffer.h"
+#include "SimpleTextEditor.h"
 using namespace std;
 
 /*

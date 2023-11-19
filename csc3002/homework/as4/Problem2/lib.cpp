@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-#include "CSC3002OJActive/assignment3/lib.h"
+//#include "CSC3002OJActive/assignment3/lib.h"
 
 std::string toUpperCase(std::string str) {
    for (int i = 0; i < str.length(); i++) {
