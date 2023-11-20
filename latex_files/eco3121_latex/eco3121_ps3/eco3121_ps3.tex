@@ -1,0 +1,297 @@
+\documentclass[11pt]{exam}
+\newcommand{\myname}{Xue Zhongkai} %Write your name in here
+\newcommand{\myUCO}{122090636} %write your UCO in here
+\newcommand{\myhwtype}{Problem Set}
+\newcommand{\myhwnum}{3} %Homework set number
+\newcommand{\myclass}{ECO3121}
+\newcommand{\mylecture}{}
+\newcommand{\mysection}{}
+
+% Prefix for numedquestion's
+\newcommand{\questiontype}{Question}
+
+% Use this if your "written" questions are all under one section
+% For example, if the homework handout has Section 5: Written Questions
+% and all questions are 5.1, 5.2, 5.3, etc. set this to 5
+% Use for 0 no prefix. Redefine as needed per-question.
+\newcommand{\writtensection}{0}
+\input{Statax.tex}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  % Some math symbols
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[all]{xy}
+\usepackage{wrapfig}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\usepackage{centernot}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{\vert}{\vert}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\pagestyle{empty}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
+    \addtocounter{questionCounter}{1}%
+    \setcounter{partCounter}{0}%
+    \vspace{.2in}%
+        \noindent{\bf #1}%
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{numedquestion}[0]{%
+	\stepcounter{questionCounter}%
+    \vspace{.2in}%
+        \ifx\writtensection\undefined
+        \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+        \else
+          \if\writtensection0
+          \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+          \else
+          \noindent{\bf \questiontype \; \writtensection.\arabic{questionCounter} }%
+        \fi
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{alphaparts}[0]{%
+  \begin{enumerate}[label=\textbf{(\alph*)}]
+}{\end{enumerate}}
+
+\newenvironment{arabicparts}[0]{%
+  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*})]
+}{\end{enumerate}}
+
+\newenvironment{questionpart}[0]{%
+  \item
+}{}
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\vspace{#1}
+\end{framed}}
+
+\pagestyle{head}
+
+\headrule
+\header{\textbf{\myclass\ \mylecture\mysection}}%
+{\textbf{\myname\ (\myUCO)}}%
+{\textbf{\myhwtype\ \myhwnum}}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+  {\Large \myclass{} \myhwtype{} \myhwnum} \\
+  \myname{} (\myUCO{}) \\
+  \today
+\end{center}
+
+
+%problem1
+\begin{numedquestion}
+    \begin{enumerate}
+        %1
+        \item Here are some possible reasons why it could be biased:
+        \begin{itemize}
+            \item \textbf{Omitted variables bias.} There are variables that influence both the household's decision to rent out land and its yield, but are not included in the regression model.
+
+            \hspace{1em} The bias direction depends on the property of the omitted variable itself. For example, if richer families tend to rent out the field, and the yield is higher because of better resources, then it will cause the \textbf{upwards} of the causality. Conversely, if the field has a lower yield thus being rent out, it will cause a \textbf{downwards} of the causality.
+            \item \textbf{Simultaneity or reverse causality.} There could be a reverse causality where higher yields influence the decision to rent out land. Households experiencing high yields might be more confident in renting out their land, knowing that their remaining land is productive enough to meet their needs.
+            
+            \hspace{1em} This could lead to an \textbf{upwards} bias, as the model would capture the effect of high yields on renting behavior, not the other way around.
+
+            \item \textbf{Measurement Error.} If there is a measurement error in the independent variable, it could bias the results. This is particularly relevant in agricultural studies where precise measurement can be challenging.
+
+            \hspace{1em} Typically, single measurement error in the independent variable leads to attenuation bias, meaning the estimated effect would lead to a \textbf{downwards} bias to zero.
+        \end{itemize}
+        %2
+        \item This IV is \textbf{not true} after justification. Here are assumptions I check for:
+        \begin{itemize}
+            \item \textbf{Check relevance:} The instrumental variable (total land area) must be correlated with the endogenous explanatory variable (rental out share).
+            
+            \hspace{1em} It is plausible as households with more land might be more inclined or able to rent out a portion of it.
+
+        \item \textbf{Check exogeneity:} The total land area must not be correlated with the error term in the regression model, and only influence the agricultural yield through its effect on the rental out share.
+
+        \hspace{1em} This assumption fail to be reasonable. The total land area could have a direct effect on agricultural yield, independent of land rental activities. Larger areas might lead to economies of scale or more efficient use of resources influencing the yield.
+        \end{itemize}
+        %3
+        \item First we use the Rainfall.dta, transform its \textit{vl\_id} to string to guarantee unity, and save it to the working directory.
+        \begin{statax}
+    use "/Users/kevinshuey/Github/coursework/eco3121/as3/Rainfall.dta", clear
+    tostring vl_id, replace
+    save Rainfall_temp.dta, replace
+        \end{statax}
+        \hspace{1em} After we prepare for the lyield:
+        \begin{statax}
+    use aghousehold.dta, clear
+    gen yield=d32/d31
+    gen lyield = ln(yield)
+        \end{statax}
+        we merge the datasets and drop the missing values.
+        \begin{statax}
+    merge m:1 vl_id using Rainfall_temp.dta
+    drop if missing(d31) | missing(c13) | missing(av_rain) | missing(lyield)
+        \end{statax}
+        \hspace{1em} Here we have the first stage regression model:
+        $$rental\_out\_share_i = \pi_1 av\_rain + \pi_0$$
+        then we perform the regression
+        \begin{statax}
+    gen rental_out_share = c13/d31*100
+    reg rental_out_share av_rain
+        \end{statax}
+        and the output
+        
+        \includegraphics[width=0.8\textwidth]{3-1_.png}
+        
+        \hspace{1em} The result indicates that one unit of increase in \textit{av\_rain} will lead to 0.007902 increase in the percentage point of \textit{rental\_out\_share}. We find the F-statistics to be 35.99 thus indicating a strong IV.
+        
+        %4
+        \item The 2nd stage IV point estimate is here as
+        $$lyield_i = \beta_0 + \beta_1 rental\_out\_share\_hat_i + \mu_i$$
+        with the code as
+        \begin{statax}
+    predict rental_out_share_hat
+    reg lyield rental_out_share_hat
+        \end{statax}
+        and the output
+        
+        \includegraphics[width=0.8\textwidth]{3-2_.png}
+        
+        \hspace{1em} The result indicates that one unit of increase in \textit{rental\_out\_share\_hat} will lead to 0.2819\% increase in the \textit{yield}.
+
+        \hspace{1em} We have the t-statistics to be
+        $$t = \frac{\hat{\beta_1}}{se(\hat{\beta_1})} = \frac{0.0028185}{0.0012814}= 2.200 > 1.96$$
+        \hspace{1em} Thus we have 95\% confidence to believe that there is causality between \textit{rental\_out\_share\_hat} and \textit{rental\_out\_share}.
+        
+        %5
+        \item With the direct command
+        \begin{statax}
+    ivreg lyield (rental_out_share = av_rain)
+        \end{statax}
+        we have
+        
+        \includegraphics[width=0.8\textwidth]{3-3_.png}
+
+        We find $\beta_{IV}$ to be the same, while the standard error seems a bit larger in (5).
+
+        %6
+        \item  After executing the results:
+        \begin{statax}
+    save aghousehold_temp.dta
+    use aghousehold_temp.dta, clear
+    drop _merge
+    gen vl_id2 = substr(vl_id, 1, 2)
+    merge m:1 vl_id2 using landlaw.dta
+    drop if missing(implemented) | missing(av_rain) | missing(lyield) /*
+    */| missing(rental_out_share)
+        \end{statax}
+        
+        we begin to check for relevance and exogeneity:
+        \begin{itemize}
+        \item \textbf{Check relevance:} We perform the first-stage regression as
+        \begin{statax}
+    reg rental_out_share av_rain implemented
+    test av_rain implemented
+        \end{statax}
+        and the result
+        
+        \includegraphics[width=0.8\textwidth]{3-5_.png}
+        
+        \hspace{1em} We find the F-statistics to be 25.08. Hence we have a strong IV indicating the significant relevance. 
+        \item \textbf{Check exogeneity:} As the single independent variable here is explained by 2 IVs, we apply J test for overidentification. 
+        
+        a) First we perform the 2SLS estimator with 2 IVs, and predict ${lyield\_hat}$. 
+        \begin{statax}
+    ivreg lyield (rental_out_share = av_rain implemented)
+    predict lyield_hat
+        \end{statax}
+        
+        b) Then we compute the residual
+        $$\hat{u_i} = lyield_i - lyield\_hat_i$$
+        with the code
+        \begin{statax}
+    gen resid = lyield - lyield_hat
+        \end{statax}
+        c) Finally we regress $\hat{u_i}$ on $rental\_out \_share_i$, $av\_rain$ and $implemented_i$, 
+        \begin{statax}
+    reg resid rental_out_share av_rain implemented 
+    test av_rain implemented 
+        \end{statax}
+        with the result
+        
+        \includegraphics[width=0.4\textwidth]{3-6_.png}
+        
+        and compute the F-statistic with the corresponding J-statistic: 
+        $$J = 2F = 19.94 \sim \chi^2(1)$$
+        
+        \hspace{1em} We have the J-statistic to be 19.94, which is significantly large. Thus there is NO significant exogeneity.
+        \end{itemize}
+    \end{enumerate}
+    \textbf{Appendix: }Here is the .do File for Problem 1.
+    \begin{statax}
+    use "/Users/kevinshuey/Github/coursework/eco3121/as3/Rainfall.dta", clear
+    tostring vl_id, replace
+    save Rainfall_temp.dta, replace
+    
+    use aghousehold.dta, clear
+    gen yield=d32/d31
+    gen lyield = ln(yield)
+    
+    merge m:1 vl_id using Rainfall_temp.dta
+    drop if missing(d31) | missing(c13) | missing(av_rain) | missing(lyield)
+    
+    gen rental_out_share = c13/d31*100
+    reg rental_out_share av_rain
+    
+    predict rental_out_share_hat
+    reg lyield rental_out_share_hat
+    
+    ivreg lyield (rental_out_share = av_rain)
+    
+    save aghousehold_temp.dta
+    use aghousehold_temp.dta, clear
+    drop _merge
+    gen vl_id2 = substr(vl_id, 1, 2)
+    merge m:1 vl_id2 using landlaw.dta
+    drop if missing(implemented) | missing(av_rain) | missing(lyield) /*
+    */| missing(rental_out_share)
+    
+    
+    reg rental_out_share av_rain implemented
+    test av_rain implemented
+    
+    
+    ivreg lyield (rental_out_share = av_rain implemented)
+    predict lyield_hat
+    
+    gen resid = lyield - lyield_hat
+    
+    reg resid rental_out_share av_rain implemented 
+    test av_rain implemented 
+
+
+
+    \end{statax}
+\end{numedquestion}
+
+
+
+    
+   \centerline{\textbf{********************* This is the end of Problem Set 3. *********************}}
+
+
+\end{document}
