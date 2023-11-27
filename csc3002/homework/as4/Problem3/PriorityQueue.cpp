@@ -76,7 +76,7 @@ void PriorityQueue<ValueType>::clear() {
  * determined using linear search and therefore runs in O(N) time.
  * Chapter 19 introduces an alternate implementation of PriorityQueue
  * that runs in O(log N) time.
- */
+ */ 
 
 template <typename ValueType>
 void PriorityQueue<ValueType>::enqueue(ValueType value, double priority) {

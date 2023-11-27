@@ -11,7 +11,8 @@
 #include <iostream>
 #include <sstream>
 #include <stack>
-#include "CSC3002OJActive/assignment5/tokenscanner.h"
+#include "tokenscanner.h"
+//#include "CSC3002OJActive/assignment5/tokenscanner.h"
 
 TokenScanner::TokenScanner() {
     initScanner();

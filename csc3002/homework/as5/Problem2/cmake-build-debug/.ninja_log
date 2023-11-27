@@ -1,0 +1,9 @@
+# ninja log v5
+0	777	1701018566242443346	CMakeFiles/Problem2.dir/lib.cpp.o	7fd72339327ce8c1
+1	779	1701018566241910807	CMakeFiles/Problem2.dir/PriorityQueue.cpp.o	98925fabf8b2cd2e
+781	874	1701018566343024244	Problem2	ce083b1270076a76
+2	787	1701018755423696663	CMakeFiles/Problem2.dir/PriorityQueue.cpp.o	98925fabf8b2cd2e
+789	876	1701018755517178678	Problem2	ce083b1270076a76
+12	873	1701048453219396896	CMakeFiles/Problem2.dir/PriorityQueue.cpp.o	98925fabf8b2cd2e
+1	839	1701049386233515957	CMakeFiles/Problem2.dir/PriorityQueue.cpp.o	98925fabf8b2cd2e
+839	924	1701049386323476124	Problem2	ce083b1270076a76

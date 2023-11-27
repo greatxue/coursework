@@ -14,10 +14,10 @@
 #include <stack>
 #include <iostream>
 #include <string>
-#include "CSC3002OJActive/assignment5/tokenscanner.h" // for OJ test
-#include "CSC3002OJActive/assignment5/stringmap.h" // for OJ test
-// #include "tokenscanner.h" // for local test
-// #include "stringmap.h" // for local test
+//#include "CSC3002OJActive/assignment5/tokenscanner.h" // for OJ test
+//#include "CSC3002OJActive/assignment5/stringmap.h" // for OJ test
+#include "tokenscanner.h" // for local test
+#include "stringmap.h" // for local test
 using namespace std;
 
 /*
@@ -123,9 +123,29 @@ int StringMap::getNBuckets() {
  * them into a new table.
  */
 
-void StringMap::rehash(int nBuckets) {
-   // TODO
+void StringMap::rehash(int newNBuckets) {
+    KeyValuePair *newBuckets = new KeyValuePair[newNBuckets];
+
+    for (int i = 0; i < newNBuckets; i++) {
+        newBuckets[i].occupied = false;
+    }
+
+    KeyValuePair *oldBuckets = buckets;
+    int oldNBuckets = nBuckets;
+
+    buckets = newBuckets;
+    nBuckets = newNBuckets;
+    count = 0;
+
+    for (int i = 0; i < oldNBuckets; i++) {
+        if (oldBuckets[i].occupied) {
+            put(oldBuckets[i].key, oldBuckets[i].value);
+        }
+    }
+
+    delete[] oldBuckets;
 }
+
 
 /*
  * Private method: findKey
@@ -138,7 +158,19 @@ void StringMap::rehash(int nBuckets) {
 
 int StringMap::findKey(const string & key) const {
    // TODO
-   return 0;
+   int hash = hashCode(key);
+   int bucket = hash % nBuckets;
+
+   for (int i = 0; i < nBuckets; i++) {
+       int index = (bucket + i) % nBuckets;
+       if (!buckets[index].occupied) {
+           return -1;
+       }
+       else if (buckets[index].key == key) {
+           return index;
+       }
+   }
+   return -1;
 }
 
 /*
@@ -151,9 +183,26 @@ int StringMap::findKey(const string & key) const {
 
 int StringMap::insertKey(const string & key) {
    // TODO
-   return 0;
+    int hash = hashCode(key);
+    int bucket = hash % nBuckets;
 
+    for (int i = 0; i < nBuckets; i++) {
+        int index = (bucket + i) % nBuckets;
+        if (!buckets[index].occupied) {
+            buckets[index].key = key;
+            buckets[index].occupied = true;
+            count++;
+            return index;
+        } else if (buckets[index].key == key) {
+            return index;
+        }
+    }
+
+    error("Insufficient space in hash table");
+    return -1;
 }
+
+
 
 /*
  * Implementation notes: hashCode
