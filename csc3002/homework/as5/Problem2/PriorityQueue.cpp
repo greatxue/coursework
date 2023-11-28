@@ -54,9 +54,18 @@ void PriorityQueue<ValueType>::clear() {
 template <typename ValueType>
 void PriorityQueue<ValueType>::enqueue(ValueType value, double priority) {
     //TODO
+    heap.push_back({value, priority, enqueueCount++});
     count++;
-    return PriorityQueue<ValueType>::enqueueHeap(value, priority);
+    int index = count - 1;
 
+    while (index > 0) {
+        int parent = (index - 1) / 2;
+        if (takesPriority(parent, index)) {
+            break;
+        }
+        swapHeapEntries(parent, index);
+        index = parent;
+    }
 }
 
 
@@ -71,10 +80,28 @@ template <typename ValueType>
 ValueType PriorityQueue<ValueType>::dequeue() {
    if (count == 0) error("dequeue: Attempting to dequeue an empty queue");
    //TODO
+    ValueType value = heap[0].value;
+    swapHeapEntries(0, count - 1);
     count--;
-    return PriorityQueue<ValueType>::dequeueHeap();
+    int index = 0;
+    while (true) {
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+        if (left >= count) {
+            break;
+        }
+        int child = left;
+        if (right < count && takesPriority(right, left)) {
+            child = right;
+        }
+        if (takesPriority(index, child)) {
+            break;
+        }
+        swapHeapEntries(index, child);
+        index = child;
+    }
 
-
+    return value;
 
 }
 
@@ -95,50 +122,16 @@ double PriorityQueue<ValueType>::peekPriority() const {
 template <typename ValueType>
 void PriorityQueue<ValueType>::enqueueHeap(ValueType & value, double priority) {
    //TODO
-    typename PriorityQueue<ValueType>::HeapEntry entry;
-    entry.value = value;
-    entry.priority = priority;
-    entry.sequence = PriorityQueue<ValueType>::enqueueCount++;
-    PriorityQueue<ValueType>::heap.push_back(entry);
-    int current = PriorityQueue<ValueType>::heap.size() - 1;
-    while (current > 0) {
-        int parent = (current - 1) / 2;
-        if (PriorityQueue<ValueType>::takesPriority(current, parent)) {
-            PriorityQueue<ValueType>::swapHeapEntries(current, parent);
-            current = parent;
-        } else {
-            break;
-        }
-    }
+
 }
 
 
 template <typename ValueType>
-ValueType PriorityQueue<ValueType>::dequeueHeap(){
-   //TODO
-    ValueType result = PriorityQueue<ValueType>::heap[0].value;
-    PriorityQueue<ValueType>::heap[0] = PriorityQueue<ValueType>::heap.back();
-    PriorityQueue<ValueType>::heap.pop_back();
-    int current = 0;
-    while (current < PriorityQueue<ValueType>::heap.size()) {
-        int leftChild = 2 * current + 1;
-        int rightChild = 2 * current + 2;
-        int smallestChild = current;
-        if (leftChild < PriorityQueue<ValueType>::heap.size() && PriorityQueue<ValueType>::takesPriority(leftChild, smallestChild)) {
-            smallestChild = leftChild;
-        }
-        if (rightChild < PriorityQueue<ValueType>::heap.size() && PriorityQueue<ValueType>::takesPriority(rightChild, smallestChild)) {
-            smallestChild = rightChild;
-        }
-        if (smallestChild != current) {
-            PriorityQueue<ValueType>::swapHeapEntries(current, smallestChild);
-            current = smallestChild;
-        } else {
-            break;
-        }
-    }
-    return result;
+ValueType PriorityQueue<ValueType>::dequeueHeap() {
+    //TODO
 }
+
+
 
 template <typename ValueType>
 bool PriorityQueue<ValueType>::takesPriority(int i1, int i2) {
@@ -153,19 +146,21 @@ template <typename ValueType>
 void PriorityQueue<ValueType>::swapHeapEntries(int i1, int i2) {
    /* Swap elements in the two positions */
    //TODO
-   ValueType tmp;
-   std::swap(heap[i1], heap[i2]);
+    HeapEntry entry = heap[i1];
+    heap[i1] = heap[i2];
+    heap[i2] = entry;
 }
 
 template <typename ValueType>
 std::string PriorityQueue<ValueType>::toString() {
    /* convert the PriorityQueue into a printable String */
    //TODO
-    std::stringstream ss;
-    for (const auto& entry : heap) {
-        ss << entry.value << ":" << entry.priority << " ";
+    string queueStr = "{";
+    for (int i = 0; i < count - 1; i++) {
+        queueStr += to_string(int(heap[i].priority)) + ":\"" + heap[i].value + "\", ";
     }
-    return ss.str();
+    queueStr += to_string(int(heap[count - 1].priority)) + ":\"" + heap[count - 1].value + "\"}";
+    return queueStr;
 }
 
 template <typename ValueType>
@@ -175,8 +170,8 @@ std::ostream & operator<<(std::ostream & os,
       i.e.: cout << pq gives the output of all the content in current queue without change pq */
 
    //TODO
-    os << pq.toString();
-    return os;
+   os << pq.toString();
+   return os;
 }
 
 int main() {
@@ -190,6 +185,7 @@ int main() {
       value = in_pair.substr(0, sp);
       priority = stod(in_pair.substr(sp+1, in_pair.size()));
       pq.enqueue(value, priority);
+
    }
    cout<<"pq.size() = "<<pq.size()<<endl;
    cout<<"pq.toString() : "<<pq.toString()<<endl;
