@@ -1,0 +1,59 @@
+/Users/kevinshuey/Github/coursework/csc3002/homework/proj1/cmake-build-debug/proj1
+--------------------------Read Training Set------------------------------
+Succeed in Opening the Image Set. 
+Magic Number: 2051; No. of Images: 60000; Rows for Each Image: 28; Columns for Each Image: 28
+Start Reading Images...
+Images Reading Finished. 
+
+Succeed in Reading Labels. 
+Magic Number 2049; No. of Labels 60000
+Start Reading Labels...
+Reading Labels Finished. 
+
+--------------------------Read Testing Set------------------------------
+Succeed in Opening the Image Set. 
+Magic Number: 2051; No. of Images: 10000; Rows for Each Image: 28; Columns for Each Image: 28
+Start Reading Images...
+Images Reading Finished. 
+
+Succeed in Reading Labels. 
+Magic Number 2049; No. of Labels 10000
+Start Reading Labels...
+Reading Labels Finished. 
+
+--------------------------Training Section------------------------------
+Start SVM Training...
+SVM Training Finished.
+SVM Training Time: 32.0881 seconds
+
+Start KNN Training...
+KNN Training Finished.
+KNN Training Time: 0.0174539 seconds
+
+Start ANN Training...
+ANN Training Finished.
+ANN Training Time: 28.714 seconds
+
+Start DTree Training...
+DTree Training Finished.
+DTree Training Time: 18.5415 seconds
+
+--------------------------Evaluation Section------------------------------
+Start SVM Prediction...
+SVM Prediction Finished. 
+SVM Prediction Accuracy on Testing Set: 97.55%
+
+Start KNN Prediction...
+KNN Prediction Finished. 
+KNN Prediction Accuracy on Testing Set: 97.05%
+
+Start DTrees Prediction...
+DTrees Prediction Finished. 
+DTrees Prediction Accuracy on Testing Set: 54.6%
+
+Start ANN Prediction...
+ANN Prediction Finished. 
+Prediction Accuracy on Testing Set: 96.26%
+
+Start Saving Models.
+Models Saved.

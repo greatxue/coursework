@@ -16,6 +16,19 @@ int reverseInt(int i) {
     return ((int)c1 << 24) + ((int)c2 << 16) + ((int)c3 << 8) + c4;
 }
 
+Mat one_hot(Mat label, int classes_num) {
+    // One-hot: [5] -> [0 0 0 0 5 0 0 0 0 0]
+    int rows = label.rows;
+    Mat one_hot = Mat::zeros(rows, classes_num, CV_32FC1);
+
+    for (int i = 0; i < label.rows; i++) {
+        int index = label.at<int32_t>(i, 0);
+        one_hot.at<float>(i, index) = 1.0;
+    }
+
+    return one_hot;
+}
+
 Mat read_mnist_image(const string& fileName) {
     int magic_number = 0;
     int number_of_images = 0;
@@ -23,42 +36,39 @@ Mat read_mnist_image(const string& fileName) {
     int n_cols = 0;
 
     Mat DataMat;
-
     ifstream file(fileName, ios::binary);
-    if (file.is_open())
-    {
-        cout << "成功打开图像集 ..." << endl;
 
-        file.read((char*)&magic_number, sizeof(magic_number));//幻数（文件格式）
-        file.read((char*)&number_of_images, sizeof(number_of_images));//图像总数
-        file.read((char*)&n_rows, sizeof(n_rows));//每个图像的行数
-        file.read((char*)&n_cols, sizeof(n_cols));//每个图像的列数
+    if (file.is_open()) {
+        cout << "Succeed in Opening the Image Set. " << endl;
+
+        file.read((char*)&magic_number, sizeof(magic_number)); // Magic Number
+        file.read((char*)&number_of_images, sizeof(number_of_images)); // No. of images
+        file.read((char*)&n_rows, sizeof(n_rows)); // Rows for each image
+        file.read((char*)&n_cols, sizeof(n_cols)); // Columns for each image
 
         magic_number = reverseInt(magic_number);
         number_of_images = reverseInt(number_of_images);
         n_rows = reverseInt(n_rows);
         n_cols = reverseInt(n_cols);
-        cout << "幻数（文件格式）:" << magic_number
-             << " 图像总数:" << number_of_images
-             << " 每个图像的行数:" << n_rows
-             << " 每个图像的列数:" << n_cols << endl;
 
-        cout << "开始读取Image数据......" << endl;
+        cout << "Magic Number: " << magic_number
+             << "; No. of Images: " << number_of_images
+             << "; Rows for Each Image: " << n_rows
+             << "; Columns for Each Image: " << n_cols << endl;
+
+        cout << "Start Reading Images..." << endl;
 
         DataMat = Mat::zeros(number_of_images, n_rows * n_cols, CV_32FC1);
         for (int i = 0; i < number_of_images; i++) {
             for (int j = 0; j < n_rows * n_cols; j++) {
                 unsigned char temp = 0;
                 file.read((char*)&temp, sizeof(temp));
-                //可以在下面这一步将每个像素值归一化
-                float pixel_value = float(temp);
-                //按照行将像素值一个个写入Mat中
+                auto pixel_value = float(temp);
+                // Write the pixel into the matrix one by one.
                 DataMat.at<float>(i, j) = pixel_value;
             }
         }
-
-        cout << "读取Image数据完毕......" << endl;
-
+        cout << "Images Reading Finished. \n" << endl;
     }
     file.close();
     return DataMat;
@@ -71,27 +81,28 @@ Mat read_mnist_label(const string& fileName) {
     Mat LabelMat;
 
     ifstream file(fileName, ios::binary);
-    if (file.is_open())
-    {
-        cout << "成功打开标签集 ... " << endl;
+    if (file.is_open()) {
+        cout << "Succeed in Reading Labels. " << endl;
 
         file.read((char*)&magic_number, sizeof(magic_number));
         file.read((char*)&number_of_items, sizeof(number_of_items));
         magic_number = reverseInt(magic_number);
         number_of_items = reverseInt(number_of_items);
 
-        cout << "幻数（文件格式）:" << magic_number << "  ;标签总数:" << number_of_items << endl;
+        cout << "Magic Number " << magic_number
+             << "; No. of Labels " << number_of_items << endl;
 
-        cout << "开始读取Label数据......" << endl;
-        //CV_32SC1代表32位有符号整型 通道数为1
+        cout << "Start Reading Labels..." << endl;
+
+        // CV_32SC1: 32-bit signed integer type ，with 1 channel
         LabelMat = Mat::zeros(number_of_items, 1, CV_32SC1);
+
         for (int i = 0; i < number_of_items; i++) {
             unsigned char temp = 0;
             file.read((char*)&temp, sizeof(temp));
             LabelMat.at<unsigned int>(i, 0) = (unsigned int)temp;
         }
-        cout << "读取Label数据完毕......" << endl;
-
+        cout << "Reading Labels Finished. \n" << endl;
     }
     file.close();
     return LabelMat;
