@@ -1,4 +1,6 @@
-## C++ Project: Handwritten Digit Recognition with OpenCV
+<h2 align="center">C++ Project: Handwritten Digit Recognition with OpenCV</h2>
+
+<div align="center">Xue Zhongkai (122090636)</div>
 
 ### 1. Introduction
 
@@ -41,7 +43,15 @@ Here is the original project setup utilization:
 
 + Locally pre-installed **OpenCV 4.8.1** via Homebrew. 
 
-The `CMakeLists.txt` file is included within the source files and can be compiled and run normally through CLion. The compilation folder `cmake-build-debug` is included within the source files, and the terminal output is also contained as `output.txt`.
+The `CMakeLists.txt` file is included within the source files and can be compiled and run normally through CLion. You could also execute it as follows in the terminal:
+
+```shell
+cmake .
+make
+./proj1
+```
+
+The compilation folder `cmake-build-debug` is included within the source files, and the output is also contained as `output.txt`.
 
 **Important Note:** 
 
