@@ -1,0 +1,235 @@
+## This file contains all the build statements describing the
+# compilation DAG.
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# 
+# Which is the root file.
+# =============================================================================
+
+# =============================================================================
+# Project: Problem1_qt
+# Configurations: Debug
+# =============================================================================
+
+#############################################
+# Minimal version of Ninja required by this file
+
+ninja_required_version = 1.5
+
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Debug
+# =============================================================================
+# Include auxiliary files.
+
+
+#############################################
+# Include rules file.
+
+include CMakeFiles/rules.ninja
+
+# =============================================================================
+
+#############################################
+# Logical path to working directory; prefix for absolute paths.
+
+cmake_ninja_workdir = /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/
+# =============================================================================
+# Object build statements for EXECUTABLE target Problem1_qt
+
+
+#############################################
+# Order-only phony target for Problem1_qt
+
+build cmake_object_order_depends_target_Problem1_qt: phony || Problem1_qt_autogen Problem1_qt_autogen/mocs_compilation.cpp Problem1_qt_autogen/timestamp Problem1_qt_autogen_timestamp_deps
+
+build CMakeFiles/Problem1_qt.dir/Problem1_qt_autogen/mocs_compilation.cpp.o: CXX_COMPILER__Problem1_qt_Debug /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Problem1_qt_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_Problem1_qt
+  DEFINES = -DQT_CORE_LIB
+  DEP_FILE = CMakeFiles/Problem1_qt.dir/Problem1_qt_autogen/mocs_compilation.cpp.o.d
+  FLAGS = -DQT_QML_DEBUG -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.5 -fPIC -std=gnu++17
+  INCLUDES = -I/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Problem1_qt_autogen/include -iframework /Applications/5.15.2/clang_64/lib -isystem /Applications/5.15.2/clang_64/lib/QtCore.framework/Headers -isystem /Applications/5.15.2/clang_64/./mkspecs/macx-clang
+  OBJECT_DIR = CMakeFiles/Problem1_qt.dir
+  OBJECT_FILE_DIR = CMakeFiles/Problem1_qt.dir/Problem1_qt_autogen
+
+build CMakeFiles/Problem1_qt.dir/Problem1.cpp.o: CXX_COMPILER__Problem1_qt_Debug /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/Problem1_qt/Problem1.cpp || cmake_object_order_depends_target_Problem1_qt
+  DEFINES = -DQT_CORE_LIB
+  DEP_FILE = CMakeFiles/Problem1_qt.dir/Problem1.cpp.o.d
+  FLAGS = -DQT_QML_DEBUG -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.5 -fPIC -std=gnu++17
+  INCLUDES = -I/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Problem1_qt_autogen/include -iframework /Applications/5.15.2/clang_64/lib -isystem /Applications/5.15.2/clang_64/lib/QtCore.framework/Headers -isystem /Applications/5.15.2/clang_64/./mkspecs/macx-clang
+  OBJECT_DIR = CMakeFiles/Problem1_qt.dir
+  OBJECT_FILE_DIR = CMakeFiles/Problem1_qt.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Problem1_qt
+
+
+#############################################
+# Link the executable Problem1_qt
+
+build Problem1_qt: CXX_EXECUTABLE_LINKER__Problem1_qt_Debug CMakeFiles/Problem1_qt.dir/Problem1_qt_autogen/mocs_compilation.cpp.o CMakeFiles/Problem1_qt.dir/Problem1.cpp.o | /Applications/5.15.2/clang_64/lib/QtCore.framework/QtCore || Problem1_qt_autogen Problem1_qt_autogen_timestamp_deps
+  FLAGS = -DQT_QML_DEBUG -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.5
+  LINK_LIBRARIES = -Wl,-rpath,/Applications/5.15.2/clang_64/lib  /Applications/5.15.2/clang_64/lib/QtCore.framework/QtCore
+  LINK_PATH = -F/Applications/5.15.2/clang_64/lib
+  OBJECT_DIR = CMakeFiles/Problem1_qt.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Problem1_qt
+  TARGET_PDB = Problem1_qt.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug && /Applications/Tools/CMake/CMake.app/Contents/bin/ccmake -S/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/Problem1_qt -B/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug && /Applications/Tools/CMake/CMake.app/Contents/bin/cmake --regenerate-during-build -S/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/Problem1_qt -B/Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build CMakeFiles/install.util: CUSTOM_COMMAND all
+  COMMAND = cd /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug && /Applications/Tools/CMake/CMake.app/Contents/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build install: phony CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build CMakeFiles/install/local.util: CUSTOM_COMMAND all
+  COMMAND = cd /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug && /Applications/Tools/CMake/CMake.app/Contents/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build install/local: phony CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
+  COMMAND = cd /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug && /Applications/Tools/CMake/CMake.app/Contents/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build install/strip: phony CMakeFiles/install/strip.util
+
+
+#############################################
+# Utility command for Problem1_qt_autogen_timestamp_deps
+
+build Problem1_qt_autogen_timestamp_deps: phony CMakeFiles/Problem1_qt_autogen_timestamp_deps
+
+
+#############################################
+# Utility command for Problem1_qt_autogen
+
+build Problem1_qt_autogen: phony CMakeFiles/Problem1_qt_autogen Problem1_qt_autogen/timestamp Problem1_qt_autogen/mocs_compilation.cpp Problem1_qt_autogen_timestamp_deps
+
+
+#############################################
+# Custom command for Problem1_qt_autogen/timestamp
+
+build Problem1_qt_autogen/timestamp Problem1_qt_autogen/mocs_compilation.cpp | ${cmake_ninja_workdir}Problem1_qt_autogen/timestamp ${cmake_ninja_workdir}Problem1_qt_autogen/mocs_compilation.cpp: CUSTOM_COMMAND /Applications/5.15.2/clang_64/bin/moc || Problem1_qt_autogen_timestamp_deps
+  COMMAND = cd /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug && /Applications/Tools/CMake/CMake.app/Contents/bin/cmake -E cmake_autogen /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem1_qt_autogen.dir/AutogenInfo.json Debug && /Applications/Tools/CMake/CMake.app/Contents/bin/cmake -E touch /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Problem1_qt_autogen/timestamp && /Applications/Tools/CMake/CMake.app/Contents/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/Problem1_qt /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/Problem1_qt /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Problem1_qt_autogen/deps /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/d/886331aa02c171444183063f49c6b4bf91639e427f701ebaa9463c7816a1cecd.d
+  DESC = Automatic MOC and UIC for target Problem1_qt
+  depfile = /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/d/886331aa02c171444183063f49c6b4bf91639e427f701ebaa9463c7816a1cecd.d
+  restat = 1
+
+
+#############################################
+# Phony custom command for CMakeFiles/Problem1_qt_autogen_timestamp_deps
+
+build CMakeFiles/Problem1_qt_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/Problem1_qt_autogen_timestamp_deps: phony /Applications/5.15.2/clang_64/lib/QtCore.framework/QtCore /Applications/5.15.2/clang_64/bin/moc
+
+
+#############################################
+# Phony custom command for CMakeFiles/Problem1_qt_autogen
+
+build CMakeFiles/Problem1_qt_autogen | ${cmake_ninja_workdir}CMakeFiles/Problem1_qt_autogen: phony Problem1_qt_autogen/timestamp || Problem1_qt_autogen_timestamp_deps
+
+# =============================================================================
+# Target aliases.
+
+# =============================================================================
+# Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/build-Problem1_qt-Desktop_Qt_5_15_2_clang_64bit-Debug
+
+build all: phony Problem1_qt
+
+# =============================================================================
+# Built-in targets
+
+
+#############################################
+# Re-run CMake if any of its inputs changed.
+
+build build.ninja: RERUN_CMAKE | .qtc/package-manager/auto-setup.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5/Qt5Config.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5/Qt5ModuleLocation.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeParseArguments.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/AppleClang-CXX.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/Clang.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/GNU.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/GNUInstallDirs.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-Clang-CXX.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-Clang.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Darwin-Initialize.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Darwin.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/Problem1_qt/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
+  pool = console
+
+
+#############################################
+# A missing CMake input file is not an error.
+
+build .qtc/package-manager/auto-setup.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5/Qt5Config.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5/Qt5ModuleLocation.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake /Applications/5.15.2/clang_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeParseArguments.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/AppleClang-CXX.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/Clang.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/GNU.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/GNUInstallDirs.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-Clang-CXX.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-Clang.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Darwin-Initialize.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Darwin.cmake /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /Users/kevinshuey/Github/Assignments/cuhksz_CSC3002/homework/as1/Problem1/Problem1_qt/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
+
+
+#############################################
+# Clean additional files.
+
+build CMakeFiles/clean.additional: CLEAN_ADDITIONAL
+  CONFIG = Debug
+
+
+#############################################
+# Clean all the built files.
+
+build clean: CLEAN CMakeFiles/clean.additional
+
+
+#############################################
+# Print all primary targets available.
+
+build help: HELP
+
+
+#############################################
+# Make the all target the default.
+
+default all

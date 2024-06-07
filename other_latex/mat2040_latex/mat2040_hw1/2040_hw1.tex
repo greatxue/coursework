@@ -1,0 +1,600 @@
+\documentclass[11pt]{exam}
+\newcommand{\myname}{Xue Zhongkai} %Write your name in here
+\newcommand{\myUCO}{122090636} %write your UCO in here
+\newcommand{\myhwtype}{Homework}
+\newcommand{\myhwnum}{1} %Homework set number
+\newcommand{\myclass}{MAT2040}
+\newcommand{\mylecture}{}
+\newcommand{\mysection}{}
+
+% Prefix for numedquestion's
+\newcommand{\questiontype}{Question}
+
+% Use this if your "written" questions are all under one section
+% For example, if the homework handout has Section 5: Written Questions
+% and all questions are 5.1, 5.2, 5.3, etc. set this to 5
+% Use for 0 no prefix. Redefine as needed per-question.
+\newcommand{\writtensection}{0}
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  % Some math symbols
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[all]{xy}
+\usepackage{wrapfig}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\usepackage{centernot}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{\vert}{\vert}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\pagestyle{empty}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
+    \addtocounter{questionCounter}{1}%
+    \setcounter{partCounter}{0}%
+    \vspace{.2in}%
+        \noindent{\bf #1}%
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{numedquestion}[0]{%
+	\stepcounter{questionCounter}%
+    \vspace{.2in}%
+        \ifx\writtensection\undefined
+        \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+        \else
+          \if\writtensection0
+          \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+          \else
+          \noindent{\bf \questiontype \; \writtensection.\arabic{questionCounter} }%
+        \fi
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{alphaparts}[0]{%
+  \begin{enumerate}[label=\textbf{(\alph*)}]
+}{\end{enumerate}}
+
+\newenvironment{arabicparts}[0]{%
+  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*})]
+}{\end{enumerate}}
+
+\newenvironment{questionpart}[0]{%
+  \item
+}{}
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\vspace{#1}
+\end{framed}}
+
+\pagestyle{head}
+
+\headrule
+\header{\textbf{\myclass\ \mylecture\mysection}}%
+{\textbf{\myname\ (\myUCO)}}%
+{\textbf{\myhwtype\ \myhwnum}}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+  {\Large \myclass{} \myhwtype{} \myhwnum} \\
+  \myname{} (\myUCO{}) \\
+  \today
+\end{center}
+
+
+% Question 1
+\begin{numedquestion}
+  \begin{arabicparts}
+    \item \textbf{False.} The system is inconsistent if it has no solutions. 
+    
+    \item \textbf{True.} 
+    
+    \item \textbf{False.} One possible non-e.g.: 
+    $\begin{bmatrix} 4 & 0 \\0 & 0\end{bmatrix}
+    \begin{bmatrix} 0 & 0 \\0 & 5\end{bmatrix} = 
+    \begin{bmatrix} 0 & 0 \\0 & 0\end{bmatrix}.$
+
+    \item \textbf{True.} 
+
+    \item \textbf{False.} $AB \neq BA.$
+    
+  \end{arabicparts}
+\end{numedquestion}
+
+% Question 2
+\begin{numedquestion}
+  Written in the form of \textbf{augmented matrix}, we have  
+  $$ \left[\begin{array}{ccc|c}
+      1 & -1 & 2 & 1 \\
+      2 & 1 & 1 & 8 \\
+      1 & 1 & 0 & 5\end{array} \right]
+      \xrightarrow[R_3 \rightarrow R_3-R_1]{R_2 \rightarrow \frac{R_2-2R_1}{3}}
+      \left[\begin{array}{ccc|c}
+      1 & -1 & 2 & 1 \\
+      0 & 1 & -1 & 2 \\
+      0 & 2 & -2 & 4\end{array} \right]
+      \xrightarrow{R_3 \rightarrow R_3-2R_2}
+      \left[\begin{array}{ccc|c}
+      1 & -1 & 2 & 1 \\
+      0 & 1 & -1 & 2 \\
+      0 & 0 & 0 & 0\end{array} \right]
+  $$ and 
+  $$ \left[\begin{array}{ccc|c}
+      1 & -1 & 2 & 1 \\
+      2 & 1 & 1 & 8 \\
+      1 & 1 & 0 & 5\end{array} \right] 
+      \xrightarrow[R_3 \rightarrow R_3-R_1]{R_2 \rightarrow \frac{R_2-2R_1}{3}}
+      \left[\begin{array}{ccc|c}
+      1 & -1 & 2 & 1 \\
+      0 & 1 & -1 & 2 \\
+      0 & 2 & -2 & 4\end{array} \right] 
+      \xrightarrow{R_3 \rightarrow R_3-2R_2}
+      \left[\begin{array}{ccc|c}
+      1 & -1 & 2 & 1 \\
+      0 & 1 & -1 & 2 \\
+      0 & 0 & 0 & 0\end{array} \right]
+      $$
+      We have identical RREFs, which indicates \textbf{equivalent} linear systems.
+\end{numedquestion}
+
+% Question 3
+\begin{numedquestion}
+    \begin{arabicparts}
+    \item We have coefficient matrix 
+    $\begin{bmatrix} 4 & 5 & 3 & 3 & 4 \\ 
+                    2 & 3 & 1 & 0 & 1 \\
+                    3 & 4 & 2 & 1 & 1 
+    \end{bmatrix}$ and the augmented matrix 
+    $\left[\begin{array}{ccccc|c}
+      4 & 5 & 3 & 3 & 4 & -5\\
+      2 & 3 & 1 & 0 & 1 & -3\\
+      3 & 4 & 2 & 1 & 1 & -1
+      \end{array} \right]$.
+
+     \item We have
+     $$\left[\begin{array}{ccccc|c}
+      4 & 5 & 3 & 3 & 4 & -5\\
+      2 & 3 & 1 & 0 & 1 & -3\\
+      3 & 4 & 2 & 1 & 1 & -1
+      \end{array} \right] \Rightarrow
+      \left[\begin{array}{ccccc|c}
+      2 & 3 & 1 & 0 & 1 & -3\\
+      4 & 5 & 3 & 3 & 4 & -5\\
+      3 & 4 & 2 & 1 & 1 & -1
+      \end{array} \right] \Rightarrow
+      \left[\begin{array}{ccccc|c}
+      2 & 3 & 1 & 0 & 1 & -3\\
+      0 & 1 & -1 & -3 & -2 & -1\\
+      0 & -1 & 1 & 2 & -1 & 7
+      \end{array} \right] $$
+      $$\Rightarrow 
+      \left[\begin{array}{ccccc|c}
+      2 & 3 & 1 & 0 & 1 & -3\\
+      0 & 1 & -1 & -3 & -2 & -1\\
+      0 & 0 & 0 & 1 & 3 & -6
+      \end{array} \right] \Rightarrow
+      \left[\begin{array}{ccccc|c}
+      2 & 3 & 1 & 0 & 1 & -3\\
+      0 & 1 & -1 & 0 & 7 & -19\\
+      0 & 0 & 0 & 1 & 3 & -6
+      \end{array} \right] \Rightarrow
+      \left[\begin{array}{ccccc|c}
+      1 & 0 & 2 & 0 & -10 & 27\\
+      0 & 1 & -1 & 0 & 7 & -19\\
+      0 & 0 & 0 & 1 & 3 & -6
+      \end{array} \right]$$
+      $$\Rightarrow   \left \{    
+    \begin{aligned}
+    x_1 &= 27-2x_3+10x_5 \\
+    x_2 &= -19+x_3-7x_5  \\
+    x_4 &= -6-3x_5
+    \end{aligned}
+    \right.
+      $$
+    \end{arabicparts}
+\end{numedquestion}
+
+% Question 4
+\begin{numedquestion}
+We have the matrix to be
+$$    \left[\begin{array}{ccc|c}
+       3 & k & 1 & 0\\
+       0 & 4 & 1 & 0 \\
+       k & -5 & -1 & 0 
+      \end{array} \right]$$
+If $k = 0$, we have
+$$\left[\begin{array}{ccc|c}
+       3 & 0 & 1 & 0\\
+       0 & 4 & 1 & 0 \\
+       0 & -5 & -1 & 0 
+      \end{array} \right] \Rightarrow 
+  \left[\begin{array}{ccc|c}
+       1 & 0 & 0 & 0\\
+       0 & 1 & 0 & 0 \\
+       0 & 0 & 1 & 0 
+      \end{array} \right]
+  \text{(rejected)}$$
+      
+If $k \neq 0$, it could be reduced to the form of
+$$    \left[\begin{array}{ccc|c}
+       1 & \frac{1}{3}k & \frac{1}{3} & 0\\
+       0 & 1 & \frac{1}{4} & 0 \\
+       0 & 0 & k^2-4k+3 & 0 
+      \end{array} \right]$$
+In order for the RREF to have the property that $r < n$, we have 
+$$k^2-4k+3 =0$$
+such that it will become a $3 \times 2$ matrix of RREF, which has infinite solutions. \\
+As a result, $$k_1 = 1, \quad k_2 = 3$$
+\end{numedquestion}
+
+% Question 5
+\begin{numedquestion}
+We have the matrix to be
+$$    \left[\begin{array}{ccc|c}
+       1 & 4 & -2 & 1\\
+       1 & 7 & -6 & 6 \\
+       0 & 3 & p & q 
+      \end{array} \right]$$
+By row operations, it could be reduced to the form of
+$$    \left[\begin{array}{ccc|c}
+       1 & 4 & -2 & 1\\
+       0 & 3 & -4 & 5 \\
+       0 & 0 & p+4 & q-5
+      \end{array} \right]$$
+\begin{arabicparts}      
+    \item For the RREF to become an inconsistent one, we have 
+    $$ p+4 = 0 $$
+    As a result, $$ p=-4$$
+    
+    \item For the RREF to have a unique solution, we have
+    $$ \left \{    
+    \begin{aligned}
+    p+4 &\neq 0 \\
+    q-5 &\neq 0 \\
+    \end{aligned}
+    \right.
+    $$
+    As a result, $$ p\neq-4$$
+
+    \item For the RREF to have infinitely many solutions, we have
+    $$ \left \{    
+    \begin{aligned}
+    p+4 &= 0 \\
+    q-5 &= 0 \\
+    \end{aligned}
+    \right.
+    $$
+    As a result, $$ p=-4, \quad q=5$$
+\end{arabicparts}      
+\end{numedquestion}
+
+% Question 6
+\begin{numedquestion}
+We have the matrix to be
+$$\begin{bmatrix} 
+   1 & 0 & -1 & 1 \\ 
+   0 & 1 & 2 & 1  \\
+   0 & 0 & 1 & -1 \\
+   1 & 2 & 4 & b  
+\end{bmatrix}
+$$
+By row operations, it can be reduced to the form of
+$$\begin{bmatrix} 
+   1 & 0 & -1 & 1 \\ 
+   0 & 1 & 2 & 1  \\
+   0 & 0 & 1 & -1 \\
+   0 & 0 & 0 & b-2 
+\end{bmatrix}
+$$
+By \textbf{Thm}: An underdetermined homogeneous linear system has infinite solutions, we have $$b-2=0$$
+As a result, $$b=2$$
+\end{numedquestion}
+
+% Question 7
+\begin{numedquestion}
+We have the matrix to be
+$$    \left[\begin{array}{ccc|c}
+       1 & 1 & 1 & 2\\
+       1 & 2 & a & -1 \\
+       2 & 3 & 0 & b 
+      \end{array} \right]$$
+By row operations, it could be reduced to the form of
+$$    \left[\begin{array}{ccc|c}
+       1 & 1 & 1 & 2\\
+       0 & 1 & -2 & b-4 \\
+       0 & 0 & a+1 & b-1
+      \end{array} \right]$$
+\begin{arabicparts}      
+    \item For the RREF to become an inconsistent one, we have 
+    $$ \left \{
+    \begin{aligned}
+    a+1 &= 0 \\
+    b-1 &\neq 0 \\
+    \end{aligned}
+    \right.
+    $$
+    As a result, $$ a=-1, \quad b\neq1$$
+    
+    \item For the RREF to have a unique solution, we have
+    $$a+1 \neq 0 $$
+    As a result, $$ a \neq-1$$
+
+    \item For the RREF to have infinitely many solutions, we have
+        $$ \left \{
+    \begin{aligned}
+    a+1 &= 0 \\
+    b-1 &= 0 \\
+    \end{aligned}
+    \right.
+    $$
+    As a result, $$ a=-1,\quad b=1$$
+\end{arabicparts}      
+\end{numedquestion}
+
+% Question 8
+\begin{numedquestion}
+We have the matrix to be
+$$    \left[\begin{array}{ccc|c}
+       1 & 1 & 1 & 0\\
+       1 & 2 & a & 0 \\
+       1 & 4 & a^2 & 0\\
+       1 & 2 & 1 & a-1
+      \end{array} \right]$$
+By row operations, it could be reduced to the form of
+$$    \left[\begin{array}{ccc|c}
+       1 & 1 & 1 & 0\\
+       0 & 1 & 0 & a-1 \\
+       0 & 0 & a^2-3a+2 & 0\\
+       0 & 0 & -1+a & 1-a
+      \end{array} \right]$$
+For the RREF to have at least one solution: in the case $a=1$, we have more than one solutions.
+In the case $a\neq1,$ we have
+$$a^2-3a+2 = 0 \Rightarrow a = 2$$
+As a result, $$ a=2 \; \text{or} \; 1$$
+When $a = 2$,
+$$    \left[\begin{array}{ccc|c}
+       1 & 1 & 1 & 0\\
+       0 & 1 & 0 & 1 \\
+       0 & 0 & 0 & 0\\
+       0 & 0 & 1 & -1
+      \end{array} \right]\Rightarrow    \left[\begin{array}{ccc|c}
+       1 & 0 & 0 & 0\\
+       0 & 1 & 0 & 1 \\
+       0 & 0 & 1 & -1
+      \end{array} \right]$$
+When $a = 1$, 
+$$    \left[\begin{array}{ccc|c}
+       1 & 1 & 1 & 0\\
+       0 & 1 & 0 & 0\\
+       0 & 0 & 0 & 0\\
+       0 & 0 & 0 & 0
+      \end{array} \right]\Rightarrow
+      \left \{\begin{aligned}
+        x_1 &= -x_3\\
+        x_2 &= 0 \\
+       \end{aligned}\right.
+$$
+\end{numedquestion} 
+
+% Question 9
+\begin{numedquestion}
+We find $A^2$ to be  
+$$A^2 = \begin{bmatrix} 
+            1 & 0 & 0 \\ 
+            0 & 1 & 0 \\
+            0 & 0 & 1  
+\end{bmatrix} = I$$
+For an odd number $k$,
+$$A^k = \underbrace{(AA)(AA)...(AA)}_{\frac{k-1}{2}groups}A = I^{\frac{k-1}{2}} A = IA = A$$
+For a even number $k$,
+$$A^k = \underbrace{(AA)(AA)...(AA)}_{\frac{k}{2}groups} = I^{\frac{k}{2}} = I$$
+
+\end{numedquestion} 
+
+% Question 10
+\begin{numedquestion}
+\begin{arabicparts}  
+    \item It is symmetric, as
+    $$(A^2-B^2)^T = (A^2)^T - (B^2)^T = (A^T)^2 - (B^T)^2 = A^2 - B^2
+    $$
+    \item It is NOT symmetric, as we have
+    $$(A+B)(A-B) = A^2 + BA - AB -B^2$$
+    Given $A^2 - B^2$ is symmetric,
+    $$(BA - AB)^T = (BA)^T-(AB)^T = A^TB^T -B^TA^T = AB-BA \neq BA-AB$$ 
+    \item It is symmetric, as 
+    $$(ABA)^T = ((AB)A)^T = A^T(AB)^T = A^TB^TA^T = ABA$$
+    \item It is NOT symmetric, as 
+    $$ (ABAB)^T = (AB)^T (AB)^T = B^TA^TB^TA^T = BABA \neq ABAB$$
+\end{arabicparts}  
+\end{numedquestion} 
+
+\begin{numedquestion}
+We have
+$$A=ab^T = 
+\begin{bmatrix} 
+    1\\ 2\\ 2 
+\end{bmatrix}
+\begin{bmatrix} 
+    1 & \frac{1}{2} & 0 \\  
+\end{bmatrix} = 
+\begin{bmatrix} 
+            1 & \frac{1}{2} & 0 \\ 
+            2 & 1 & 0 \\
+            4 & 2 & 0
+\end{bmatrix}$$ 
+Thus we have 
+$$A^{11} = \underbrace{(ab^T)(ab^T)...(ab^T)}_{10 groups} = a(b^T a)^10b^T = 1024 \times 
+\begin{bmatrix} 
+            1 & \frac{1}{2} & 0 \\ 
+            2 & 1 & 0 \\
+            4 & 2 & 0
+\end{bmatrix} = 
+\begin{bmatrix} 
+            1024 & 512 & 0 \\ 
+            2048 & 1024 & 0 \\
+            4096 & 2048 & 0
+\end{bmatrix}$$ 
+\end{numedquestion}
+
+\begin{numedquestion}
+We find $A^2$ to be a diagonal matrix, as
+$$A^2 = AA = \begin{bmatrix} 
+            9 & 0 & 0 \\ 
+            0 & 9 & 0 \\
+            0 & 0 & 9
+\end{bmatrix}$$
+Thus $$A^8 = (A^2)^4 = 
+\begin{bmatrix} 
+    6561 & 0 & 0 \\ 
+    0 & 6561 & 0 \\
+    0 & 0 & 6561
+\end{bmatrix}$$
+As a result, 
+$$A^8 - 6400I = 
+\begin{bmatrix} 
+    6561 & 0 & 0 \\ 
+    0 & 6561 & 0 \\
+    0 & 0 & 6561
+\end{bmatrix}-6400
+\begin{bmatrix} 
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}=
+\begin{bmatrix} 
+    161 & 0 & 0 \\ 
+    0 & 161 & 0 \\
+    0 & 0 & 161
+\end{bmatrix}
+$$
+\end{numedquestion}
+\begin{numedquestion}
+As $A^k = 0$, we have
+\begin{align*}  
+& \quad\; (I-A)(I+A+A^2+...+A^{k-1}) \\
+& = (I^2 +IA +IA^2 +... + IA^{k-1})+(-AI-A^2-...A^k) \\ 
+&= I^2 +A+A^2+...+A^{k-1}-A-A^2-...-A^k \\
+&= I^2 \\
+&= I
+\end{align*}
+\end{numedquestion}
+
+\begin{numedquestion}
+Assume a = $\begin{bmatrix} 
+    a_1\\ a_2\\ a_3
+\end{bmatrix}$, 
+b=$
+\begin{bmatrix} 
+    b_1\\ b_2\\ b_3  
+\end{bmatrix}$, 
+we have
+$$ab^T = 
+\begin{bmatrix} 
+    a_1b_1 & a_1b_2 & a_1b_3 \\ 
+    a_2b_1 & a_2b_2 & a_2b_3 \\
+    a_3b_1 & a_3b_2 & a_3b_3
+\end{bmatrix} =
+\begin{bmatrix} 
+    65 & 91 & 78 \\ 
+    70 & 98 & 84 \\
+    60 & 84 & 72
+\end{bmatrix}$$
+Thus we have
+$$a^Tb = 
+\begin{bmatrix} 
+    a_1 & a_2 & a_3
+\end{bmatrix}
+\begin{bmatrix} 
+    b_1\\ b_2\\ b_3
+\end{bmatrix} = a_1b_1+a_2b_2+a_3b_3 = 65+98+72 = 235$$
+\end{numedquestion}
+
+\begin{numedquestion}
+\begin{arabicparts} 
+    \item $$A = 
+\begin{bmatrix} 
+    0 & 0 \\ 
+    1 & 0 \\
+\end{bmatrix}$$
+    \item $$A = 
+\begin{bmatrix} 
+    1 & 0 \\ 
+    1 & 0 \\
+\end{bmatrix}$$
+\end{arabicparts} 
+\end{numedquestion}
+
+\begin{numedquestion}
+We have 
+$$A=\begin{bmatrix} 
+    2 & 0 \\ 
+    3 & 0 \\
+\end{bmatrix},\quad
+B=\begin{bmatrix} 
+    2 & 0 \\ 
+    4 & 0 \\
+\end{bmatrix}$$
+\end{numedquestion}
+
+\begin{numedquestion}
+    For $a_{i,j}$ in matrix $A_{m \times n}$, we have
+    $$A^TA = O \Rightarrow O_{ii} = \sum_{j=1}^{n} a_{ji}^2 = 0 \text{ for }i=1,2...n$$
+    As $a_{ji}^2 \geq 0 $, we have
+    $$a_{ji} = 0  \text{ for } j = 1, 2, 3...n$$
+    As a result, 
+    $$A_{ij} = 0 \quad \text{ for } i = 1,2,3...n;\; j = 1,2,3...n$$
+    It is equivalent to
+    $$A=O$$
+\end{numedquestion}
+
+\begin{numedquestion}
+    Based on $(A+B)^2 = A^2+B^2$,
+    $$(A+B)^2 = A^2+B^2+AB+BA = A^2 + B^2$$
+    which indicates that $$AB + BA = 0$$
+    Thus $$AB(A+I) = ABA+ABI = A(BA) + (AB)I = -A^2B+AB$$
+    As $A^2 =A$, we have
+    $$AB(A+I) = -AB+AB = O$$
+\end{numedquestion}
+
+\begin{numedquestion}
+We have 
+$$A^2 =
+\begin{bmatrix} 
+    1 & 0 & 0 & 0 \\ 
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+\end{bmatrix} = I$$
+Also we have
+$$A^3 = A^2A = IA = A$$
+Thus we have 
+$$A^{2n} = I^n = I, \quad A^{2n+1} = A^{2n} A = IA = A$$
+\end{numedquestion}
+
+\begin{numedquestion}
+We have
+$$(I-xy^T)(I+xy^T) = I -xy^T + xy^T -(xy^T)^2 = I - (xy^T)(xy^T) = I - x(y^Tx)y^T = I$$
+Thus we have
+$$(I-xy^T)^{-1} = (I+xy^T)$$
+\end{numedquestion}
+
+
+\textbf{\\ **This is the end of Homework 1.**}
+\end{document}

@@ -1,0 +1,201 @@
+\documentclass[11pt]{exam}
+\newcommand{\myname}{Xue Zhongkai} %Write your name in here
+\newcommand{\myUCO}{122090636} %write your UCO in here
+\newcommand{\myhwtype}{Homework}
+\newcommand{\myhwnum}{2} %Homework set number
+\newcommand{\myclass}{FIN2020}
+\newcommand{\mylecture}{}
+\newcommand{\mysection}{}
+
+% Prefix for numedquestion's
+\newcommand{\questiontype}{Question}
+
+% Use this if your "written" questions are all under one section
+% For example, if the homework handout has Section 5: Written Questions
+% and all questions are 5.1, 5.2, 5.3, etc. set this to 5
+% Use for 0 no prefix. Redefine as needed per-question.
+\newcommand{\writtensection}{0}
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  % Some math symbols
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[all]{xy}
+\usepackage{wrapfig}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\usepackage{centernot}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{\vert}{\vert}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\pagestyle{empty}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
+    \addtocounter{questionCounter}{1}%
+    \setcounter{partCounter}{0}%
+    \vspace{.2in}%
+        \noindent{\bf #1}%
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{numedquestion}[0]{%
+	\stepcounter{questionCounter}%
+    \vspace{.2in}%
+        \ifx\writtensection\undefined
+        \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+        \else
+          \if\writtensection0
+          \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+          \else
+          \noindent{\bf \questiontype \; \writtensection.\arabic{questionCounter} }%
+        \fi
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{alphaparts}[0]{%
+  \begin{enumerate}[label=\textbf{(\alph*)}]
+}{\end{enumerate}}
+
+\newenvironment{arabicparts}[0]{%
+  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*})]
+}{\end{enumerate}}
+
+\newenvironment{questionpart}[0]{%
+  \item
+}{}
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\vspace{#1}
+\end{framed}}
+
+\pagestyle{head}
+
+\headrule
+\header{\textbf{\myclass\ \mylecture\mysection}}%
+{\textbf{\myname\ (\myUCO)}}%
+{\textbf{\myhwtype\ \myhwnum}}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+  {\Large \myclass{} \myhwtype{} \myhwnum} \\
+  \myname{} (\myUCO{}) \\
+  \today
+\end{center}
+
+
+%Here you can enter answers to homework questions
+
+
+% p1
+\begin{numedquestion}
+  \begin{alphaparts}
+    \item B is the optimal one. Here is the reason:  
+
+    \hspace{1em}The optimal bundle is the one that is on the highest indifference curve while also lying on or below the budget constraint, thus it is optimized when the budget constraint is tangent to the corresponding indifference curve.
+
+    
+    \item For the indifference curve, we have
+    $$U = \alpha u(c_a) + (1 - \alpha)u(c_b)$$
+    \hspace{1em}and the budget constraint 
+    \begin{equation}
+    Y = p_a c_a + p_b c_b 
+    \end{equation}
+    For (1), take the derivative on both sides w.r.t. $c_a$,
+    $$c_b'(c_a) = -\frac{\alpha}{1-\alpha} \frac{u'(c_a)}{u'(c_b)}$$
+
+    For (2), the budget constraint $c_b(c_a)$ has the slope to be 
+    $$c_b'(c_a) = -\frac{p_a}{p_b}$$
+    Thus we have 
+    \begin{equation}
+    \frac{\alpha}{1-\alpha} \frac{u'(c_a)}{u'(c_b)}= \frac{p_a}{p_b}
+    \end{equation}
+    As a result, we have conditions to be
+    $$Y = p_a c_a^* + p_b c_b^*, \quad
+      \frac{\alpha}{1-\alpha} \frac{u'(c_a^*)}{u'(c_b^*)}= \frac{p_a}{p_b}
+    $$
+
+
+    \item We have the derivative to be
+    $$u'(x) = \frac{1}{x}$$
+    Thus we have the optimal assumptions
+     $$c_a^* = \frac{\alpha Y}{p_a}, \quad c_b^* = \frac{(1-\alpha) Y}{p_b}$$
+  \end{alphaparts}
+\end{numedquestion}
+
+% p2
+\begin{numedquestion}
+  \begin{alphaparts}
+    \item At $t=0$, we have the constraint to be
+    \begin{equation}
+    c_0 \leq Y - s
+    \end{equation}
+    At $t=1$, we have
+    \begin{equation}
+    c_1 \leq s(1+r)
+    \end{equation}  
+    By $(1) + \frac{(2)}{1+r}$, we have the lifetime constraint to be
+        $$c_0 + \frac{c_1}{1+r} \leq Y $$
+    
+    \item We have the optimization problem to be
+    \begin{equation*}
+    \max_{c_0,c_1} \; \ln(c_0) + \beta \ln(c_1)\quad
+    \text{s.t.} \quad c_0 + \frac{c_1}{1+r} \leq Y
+    \end {equation*}
+    We have the Lagrangian multiplier for 
+    $$L(c_0, c_1, \lambda) = \ln(c_0) + \beta \ln(c_1) + \lambda(Y - c_0 - \frac{c_1}{1+r})$$
+    For the first-order condition of choice variables, we have
+    $$\frac{\partial L}{\partial c_0} = \frac{1}{c_0}- \lambda=0, \quad
+    \frac{\partial L}{\partial c_1} = \frac{\beta}{c_1} -\frac{\lambda}{1+r}=0$$
+    \hspace{1em}and
+    $$\lambda(Y - c_0 - \frac{c_1}{1+r})=0$$
+    Thus we have $$\quad c_0^*=\frac{1}{1+\beta}Y,\quad
+    c_1^*= \frac{\beta}{1+\beta}[Y(1+r)]$$
+
+    \item The growth ratio
+    $$\frac{c_1^*}{c_0^*} = \beta(1+r)$$
+    Hence, the growth ratio will increase with the rise of $\beta$ or $r$.
+  \end{alphaparts}
+\end{numedquestion}
+
+\begin{numedquestion}
+     For a concave function $f(x)$ with a set of different $x_i$, we have
+    $$f(E[x]) > E[f(x)]\qquad\text{[Jensen's inequality]}$$
+    
+    Take the derivative of $u(c)$, we have
+    $$u'(c) = c^{-\gamma}$$
+    \hspace{1em}and
+    $$u''(c) = -\gamma c^{-\gamma-1} < 0$$
+    Thus $u(c)$ is a concave function, we have
+    \begin{equation}
+        u(\frac{c_1+c_2}{2}) > \frac{u(c_1)+u(c_2)}{2}
+    \end{equation}
+    To prove 
+    $$v(\frac{c_1+c_2}{2}, \frac{c_1+c_2}{2}) > v(c_1, c_2)$$
+    \hspace{1em}it is equivalent to
+    $$2u(\frac{c_1+c_2}{2}) > u(c_1)+u(c_2)$$
+    \hspace{1em}which is actually the same as equation (5).
+    
+    Each of the above steps is reversible, and the proposition is proved.
+    \\
+    \\
+    \\
+    \textbf{***This is the end of Homework 2.***}
+\end{numedquestion}
+
+\end{document}

@@ -1,0 +1,121 @@
+demo()
+license()
+q()
+citation
+r
+#Two-Asset Portfolio Problem#
+#Asset1#
+r1 =.06#
+sigma1=.12#
+#Asset2#
+r2 =.11#
+rho =.19#
+covar =rho*sigma1*sigma2#
+p =c(0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1)# percent of Asset1#
+##Portfolio return as function of percent of Asset1###
+variance=p^2*sigma1^2+(1-p)^2*sigma2^2+2*p*(1-p)*covar#
+sigma=sqrt(variance)#
+portfolio_return=r1*p+r2*(1-p)#
+cbind(p,sigma,return)#
+plot(sigma,portfolio_return,type=’o’)
+# 產生一個長度為10的隨機向量#
+random_vector <- runif(10)#
+#
+# 輸出向量#
+print(random_vector)#
+#
+# 計算向量中元素的平均值#
+mean_value <- mean(random_vector)#
+#
+# 輸出平均值#
+print(mean_value)
+q()
+licence()
+demo()
+help()
+# Parametres for Uniform distribution
+min_value<-0
+max_value<-1
+num_sample<-1000
+sample_size<-30
+#CLT
+set.seed(42)
+sample_means<-sapply(1:num_sample,function(x)
+mean(runif(sample_size,min=min_valus,max=max_value))
+)
+sample_means<-sapply(1:num_sample,function(x)#
++ mean(runif(sample_size,min=min_value,max=max_value))#
++ )
+sample_means<-sapply(1:num_sample,function(x), mean(runif(sample_size,min=min_value,max=max_value)))
+sample_means<-sapply(1:num_sample,function(x)mean(runif(sample_size,min=min_value,max=max_value)))
+#Plot
+hist(sample_means,probability=TRUE,main='CLT of Uniform',xlab='Sample of Mean')
+#Hyposis testing
+r
+fgfgfg
+clear
+list = c(1.75, 1.84, 2.12, 1.92, 2.62, 2.35, 3.09, 3.15, 2.53, 1.91, 3.25, 2.83)
+print(var(list))
+print(mean(list))
+print(std(list))
+sqrt(var(list))
+smiles <- read.table("smiles.txt")#
+names(smiles) <- c("groups", "scores")#
+attach(smiles)#
+## Part 1:#
+#
+# Histograms#
+splitgroup <- split(scores, groups)#
+attach(splitgroup)#
+par(mfrow = c(2, 2))#
+hist(false, main = "")#
+hist(felt, main = "")#
+hist(miserable, main = "")#
+hist(neutral, main = "")
+setwd("~/Github/cs_assignments/cuhksz_STA2002/hw1")#
+#
+smiles <- read.table("smiles.txt")#
+names(smiles) <- c("groups", "scores")#
+attach(smiles)#
+## Part 1:#
+#
+# Histograms#
+splitgroup <- split(scores, groups)#
+attach(splitgroup)#
+par(mfrow = c(2, 2))#
+hist(false, main = "")#
+hist(felt, main = "")#
+hist(miserable, main = "")#
+hist(neutral, main = "")#
+#
+# Stem-and-leaf plots#
+tapply(scores, groups, stem)#
+#
+## Part 2:#
+#
+# 5-number summaries#
+summary(false)#
+var(false)#
+sd(false)#
+#
+summary(felt)#
+var(felt)#
+sd(felt)#
+#
+summary(miserable)#
+var(miserable)#
+sd(miserable)#
+#
+summary(neutral)#
+var(neutral)#
+sd(neutral)
+# Boxplots#
+par(mfrow = c(2, 2))#
+boxplot(false)#
+title("false")#
+boxplot(felt)#
+title("felt")#
+boxplot(miserable)#
+title("miserable")#
+boxplot(neutral)#
+title("neutral")

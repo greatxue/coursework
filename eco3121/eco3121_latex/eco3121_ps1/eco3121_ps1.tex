@@ -1,0 +1,347 @@
+\documentclass[11pt]{exam}
+\newcommand{\myname}{Xue Zhongkai} %Write your name in here
+\newcommand{\myUCO}{122090636} %write your UCO in here
+\newcommand{\myhwtype}{Problem Set}
+\newcommand{\myhwnum}{1} %Homework set number
+\newcommand{\myclass}{ECO3121}
+\newcommand{\mylecture}{}
+\newcommand{\mysection}{}
+
+% Prefix for numedquestion's
+\newcommand{\questiontype}{Question}
+
+% Use this if your "written" questions are all under one section
+% For example, if the homework handout has Section 5: Written Questions
+% and all questions are 5.1, 5.2, 5.3, etc. set this to 5
+% Use for 0 no prefix. Redefine as needed per-question.
+\newcommand{\writtensection}{0}
+\input{Statax.tex}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  % Some math symbols
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[all]{xy}
+\usepackage{wrapfig}
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\usepackage{centernot}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{\vert}{\vert}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\pagestyle{empty}
+
+\def\indented#1{\list{}{}\item[]}
+\let\indented=\endlist
+
+\newcounter{questionCounter}
+\newcounter{partCounter}[questionCounter]
+
+\newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
+    \addtocounter{questionCounter}{1}%
+    \setcounter{partCounter}{0}%
+    \vspace{.2in}%
+        \noindent{\bf #1}%
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{numedquestion}[0]{%
+	\stepcounter{questionCounter}%
+    \vspace{.2in}%
+        \ifx\writtensection\undefined
+        \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+        \else
+          \if\writtensection0
+          \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
+          \else
+          \noindent{\bf \questiontype \; \writtensection.\arabic{questionCounter} }%
+        \fi
+    \vspace{0.3em} \hrule \vspace{.1in}%
+}{}
+
+\newenvironment{alphaparts}[0]{%
+  \begin{enumerate}[label=\textbf{(\alph*)}]
+}{\end{enumerate}}
+
+\newenvironment{arabicparts}[0]{%
+  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*})]
+}{\end{enumerate}}
+
+\newenvironment{questionpart}[0]{%
+  \item
+}{}
+
+\newcommand{\answerbox}[1]{
+\begin{framed}
+\vspace{#1}
+\end{framed}}
+
+\pagestyle{head}
+
+\headrule
+\header{\textbf{\myclass\ \mylecture\mysection}}%
+{\textbf{\myname\ (\myUCO)}}%
+{\textbf{\myhwtype\ \myhwnum}}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+  {\Large \myclass{} \myhwtype{} \myhwnum} \\
+  \myname{} (\myUCO{}) \\
+  \today
+\end{center}
+
+
+%Here you can enter answers to homework questions
+
+
+\begin{numedquestion}
+    All float numbers in this problem are restricted to at most 4 decimal places, if not mentioned.
+    \begin{enumerate}
+        \item First we import the data with the corresponding Stata code:
+        \begin{statax}
+        use "/Users/kevinshuey/Github/Assignments/cuhksz_ECO3121/as1/aghousehold.dta"
+        \end{statax}
+        \hspace{1em} Then we generated the variable \textbf{yield} with:
+        \begin{statax}
+        gen yield=d32/d31
+        \end{statax}
+        \hspace{1em} For summarization information, we have
+        \begin{statax}
+        sum yield c10 c13
+        \end{statax}
+        with corresponding output: 
+        
+        \includegraphics[width=0.8\textwidth]{1-1.png}
+        
+        \textbf{Thus we could conclude from the table that:}
+        
+        \hspace{1em} There are 14171 observations as a data scale. 
+        
+        \hspace{1em} The mean for \textbf{yield} per unit is 433.6169 $kg/mu$, with the standard deviation 395.1982 $kg/mu$. We have the minimum value for yield to be 0, and the maximum value to be 36461.98 $kg/mu$.
+
+        \hspace{1em} As to \textbf{arable area subcontracted into}, we have mean value to be 0.5032 $mu$, with the standard deviation to be 4.4668 $mu$. We have the minimum value to be 0, and the maximum value to be 200 $mu$.
+
+        \hspace{1em} Also, we have the mean for \textbf{arable area subcontracted out} to be 0.2165 $mu$, with the standard deviation to be 1.4894 $mu$. We have the minimum value to be 0, and the maximum value to be 60 $mu$.
+
+        \item I predict $\beta_1$ to be \textbf{negative}, $\beta_2$ to be \textbf{positive}. Here is the reason:
+
+        \hspace{1em} For a considerable period of time, farmers in rural China tends to employ primitive and straightforward farming methods. In order to develop agriculture in a modern approach, aggregate agricultural methods are introduced and recommended by local governments. Once the fields are collected, there could be potential tenants with advanced technology and aggregate productivity, while individual farmers, most of the time, still remain original ones.
+        
+        \hspace{1em} Pay attention that we invest on individual farming households. Under these circumstances, the \textbf{more} one rent-in, the \textbf{lower} efficiency, the lower yields there will be; the \textbf{more} rent-out, the higher efficiency, the \textbf{higher} yields there will be. Thus I predict $\beta_1$ to be negative, $\beta_2$ to be positive.
+
+        \item Here we use regression operation in Stata respectively.
+        First we predict $\beta_1$:
+        \begin{statax}
+        reg yield c10
+        \end{statax}
+
+        with the output:
+        
+        \includegraphics[width=0.8\textwidth]{1-3-1.png}
+        
+        \hspace{1em} Then we predict $\beta_2$:
+        \begin{statax}
+        reg yield c13
+        \end{statax}
+
+        with the output:
+
+        \includegraphics[width=0.8\textwidth]{1-3-2.png}
+        
+        \textbf{Thus we conclude from the regression that:}
+        
+        \hspace{1em} The estimated $\hat{\beta_1}$ is $-0.7800$, with the standard deviation 0.7433, with $R^2=0.0001$. The $\hat{\beta_2}$ is 0.6515, with the standard deviation 2.2291, with $R^2=0.0000$.
+
+        \hspace{1em} It agrees with my predictions, though it seems very insignificant concerning $R^2$.
+
+        \item For the equation $yield_i = \alpha_1 + \beta_1 rental\_in_i + \mu_i$, $\hat{\beta_1} = 0.7800$ indicates that:
+        
+        \hspace{1em} Holding other constants identical, one unit change in rent-in area will cause the yield to decrease by 0.7800 units.
+
+         For the equation $yield_i = \alpha_2 + \beta_2 rental\_out_i + \mu_i$, $\hat{\beta_2} = 0.6515$ indicates that:
+
+        \hspace{1em} Holding other constants identical, one unit change in rent-out area will cause the yield to increase by 0.6515 units.
+
+        \item First we use Stata codes respectively with:
+        \begin{statax}
+        reg yield c10
+        predict yield_hat1, xb
+        gen residual1=yield-yield_hat1
+        \end{statax}
+        and
+        \begin{statax}
+        reg yield c13
+        predict yield_hat2, xb
+        gen residual2=yield-yield_hat2
+        \end{statax}
+
+        then we could see the corresponding variables with data in the data browser. 
+        
+        \hspace{1em} Finally for the sum of residuals:
+        \begin{statax}
+        egen res1_total=total(residual1)
+        egen res2_total=total(residual2)
+        \end{statax} 
+
+        we could access from the data browser that 
+        $$\textbf{residual1} =0.1147,\quad\textbf{residual2} =0.3537$$
+        which is approximately 0, respectively.
+
+    \item For $\hat{\beta_1}$, we have $R^2 = 0.0001$; for $\hat{\beta_2}$, we have $R^2 = 0.0000$. 
+    
+    \hspace{1em} These two $R^2$ values could be really insignificant, which indicates that a significant portion of the variation in yields cannot be explained by the variables \textbf{arable area subcontracted into/out} themselves. 
+
+    \item For the requirements to generate new variables \textbf{rent\_in\_prop} and \textbf{rent\_out\_prop}
+    with 100 multiplied, we have:
+        \begin{statax}
+        gen rent_in_prop=c10/d31*100
+        gen rent_out_prop=c13/d31*100
+        \end{statax}
+    
+    \hspace{1em} We re-run the regression models like:
+        \begin{statax}
+        reg yield rent_in_prop
+        reg yield rent_out_prop
+        \end{statax}
+    
+    with corresponding outputs
+
+    \includegraphics[width=0.8\textwidth]{1-7-1.png}
+
+    and
+
+    \includegraphics[width=0.8\textwidth]{1-7-2.png}
+
+    \textbf{Thus we conclude from the regression that:}
+        
+        \hspace{1em} The estimated $\hat{\beta_1}$ is $0.0540$, with the standard deviation 0.0640, with $R^2= 0.0001$. The $\hat{\beta_2}$ is 0.2350, with the standard deviation 0.0479, with $R^2= 0.0017$.
+
+    \textbf{Here is the interpretation:}
+    
+        \textbf{a)} For the equation $yield_i = \alpha_1 + \beta_1 rental\_in\_share_i + \mu_i$, $\hat{\beta_1} = 0.0540$ indicates that:
+        
+        \hspace{1em} Holding other constants identical, one unit change in the proportion of rent-in area will cause the yield to increase 0.0540 units.
+
+        \textbf{b)} For the equation $yield_i = \alpha_2 + \beta_2 rental\_out\_share_i + \mu_i$, $\hat{\beta_2} = 0.2350$ indicates that:
+
+        \hspace{1em} Holding other constants identical, one unit change in the proportion of rent-out area will cause the yield to increase by 0.2350 units.
+
+    \item For the \textit{log-level} regression, we have
+        \begin{statax}
+        gen log_yield=log(yield)
+        reg yield rent_in_prop
+        reg yield rent_out_prop
+        \end{statax}
+    with the outputs
+    
+    \includegraphics[width=0.8\textwidth]{1-7-3.png}
+
+    and
+
+    \includegraphics[width=0.8\textwidth]{1-7-4.png}
+
+    \textbf{Here is the interpretation:}
+    
+        \textbf{a)} For the equation $log(yield_i) = \alpha_1 + \beta_1 rental\_in\_share_i + \mu_i$, $\hat{\beta_1} = 0.0001105$ indicates:
+        
+        \hspace{1em} Holding other constants identical, one unit change in the proportion of rent-in area will cause the change in percentage of the yield to increase by 0.0001105 units.
+
+        \textbf{b)} For the equation $log(yield_i) = \alpha_2 + \beta_2 rental\_out\_share_i + \mu_i$, $\hat{\beta_2} = 0.0003159$ indicates that:
+
+        \hspace{1em} Holding other constants identical, one unit change in the proportion of rent-out area will cause the change in percentage of the yield to increase by 0.0003159 units.
+
+    \item I prefer model (3) in q8, as it provides a smaller standard error, which could better handle skewed data and reduce heteroscedasticity.
+
+    \item \textbf{SLR4 Assumption:} For any households with their rent-in share and rent-out share, we have the expectation of the residual to be 0.
+    
+    \textbf{Preposition: }For the cause of biased estimation, one might be because \textbf{some variables are omitted}. There are other factors as important as well, e.g. farming technics. Another might be for \textbf{endogeneity}, when one or more independent variables are correlated with the error term in the regression model. 
+
+    \item The model indicates that the land rental activities can \textbf{increase} yields. Here are two possible mechanisms:
+    
+    \textbf{a)} \textbf{Efficient aggregate farming:} Land rental activities can lead to a more efficient allocation of resources in agriculture, which allows for better utilization of available resources like labor, machinery, and fertilizers.
+
+    \textbf{b)} \textbf{Specialization:} By renting land from others, some potential tenants can focus on one specific produce within their specification, leading to increased productivity and yields in those areas. 
+    \end{enumerate}
+    \textbf{Appendix: }Here is the \textbf{.do File} for Problem 1.
+    \begin{statax}
+    use "/Users/kevinshuey/Github/Assignments/cuhksz_ECO3121/as1/aghousehold.dta"
+    gen yield=d32/d31
+    sum yield c10 c13
+
+    reg yield c10
+    predict yield_hat1, xb
+    gen residual1=yield-yield_hat1
+
+    reg yield c13
+    predict yield_hat2, xb
+    gen residual2=yield-yield_hat2
+
+    egen res1_total=total(residual1)
+    egen res2_total=total(residual2)
+
+    gen rent_in_prop=c10/d31*100
+    gen rent_out_prop=c13/d31*100
+
+    reg yield rent_in_prop
+    reg yield rent_out_prop
+
+    gen log_yield=log(yield)
+    reg log_yield rent_in_prop
+    reg log_yield rent_out_prop
+    \end{statax}
+\end{numedquestion}
+
+\begin{numedquestion}
+    \begin{enumerate}
+    \item Here are variables I need:
+    \begin{table}[ht]
+    \centering
+    \begin{tabular}{lc}
+    \toprule
+    Symbol & Meaning \\
+    \midrule
+    $D_i$ & A dummy indicating variable, $D_i = 1$ if the village is selected else $D_i = 0$. \\
+    $X_i$ & Characteristic of the village, e.g. population, climate, soil, etc. \\
+    $Y_i$ & Crop yield per unit in the scale of a whole village. \\
+    \bottomrule
+    \end{tabular}
+    \end{table}
+
+    \item Here is the regression model as
+    $$Y_i = \beta_0 + \beta_1 D_i + \beta_2 X_i + u_i$$
+    
+    Here is the index and the interpretation:
+
+    \textbf{a)} $Y_i$ is \textbf{the Crop yield per unit in the scale of a whole village}. It is the major dependent variable, from which we observe the changes corresponding to independent variables.
+
+    \textbf{b)} $\beta_0$ is \textbf{the intercept}, indicating the yields when all independent variables are 0.
+
+    \textbf{c)} $\beta_1$ is \textbf{the coefficient indicating Average Treatment Effect}. When all variables except $D_i$ remain unchanged, applying the law (increasing $D_i$ from 0 to 1) would bring about increase in yield for $\beta_1$ units.
+
+    \textbf{d)} $\beta_2$ is the coefficient of other influencing factors, indicating \textbf{the characteristic of the village}. When all variables except $X_i$ remain unchanged, an 1-unit increase in $X_i$  would bring about increase in yield for $\beta_2$ units.
+
+    \textbf{e)} $u_i$ is \textbf{the residual} of the regression model, indicating unobserved influencing factors or purely random changes.
+
+    \item From the text, it indicates that selection bias may have occurred. This endogeneity might lead to insignificant or even incorrect indications on Average Treatment Effect. 
+    
+    \hspace{1em} We could check the fairness of the random selection process; or add a term like $\beta_3 S_i$, which evaluates the selection bias in the process with a score. 
+    \end{enumerate}
+\end{numedquestion}
+
+
+
+
+    
+    \centerline{\textbf{********************* This is the end of Problem Set 1. *********************}}
+
+
+\end{document}

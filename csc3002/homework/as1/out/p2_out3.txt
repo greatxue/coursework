@@ -1,0 +1,3 @@
+AA matches CTTTTC at position 1
+AA matches CTTTTC at position 2
+AA matches CTTTTC at position 3

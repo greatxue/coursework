@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2f1eea00-7767-41b0-90ac-31c68696b66e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Problem3_qt/RemoveComments.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Problem3_qt/RemoveComments.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem3_qt.dir/RemoveComments.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem3_qt.dir/RemoveComments.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem3_qt_autogen.dir/ParseCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/CMakeFiles/Problem3_qt_autogen.dir/ParseCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Problem3_qt" beforeDir="false" afterPath="$PROJECT_DIR$/../build-Problem3_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Problem3_qt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Problem_4/build-Problem4_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../Problem_4/build-Problem4_qt-Desktop_Qt_5_15_2_clang_64bit-Debug/Testing/Temporary/LastTest.log" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="1.3" />
+  </component>
+  <component name="ProjectId" id="2WIYtMQwSZyuhnI2HqPqoEs5imR" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2f1eea00-7767-41b0-90ac-31c68696b66e" name="Changes" comment="" />
+      <created>1689237159128</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1689237159128</updated>
+      <workItem from="1696421779122" duration="2009000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
